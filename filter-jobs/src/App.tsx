@@ -1,9 +1,15 @@
 import "./App.css";
+import { ContainerJobs } from "./components/container-jobs/container-jobs";
 
 function App() {
   return (
     <>
-      <h1 className="text-center text-3xl">filter jobs</h1>
+      <main>
+        <header className="bg-green-400 h-12 w-full"></header>
+        <section>
+          <ContainerJobs></ContainerJobs>
+        </section>
+      </main>
     </>
   );
 }
