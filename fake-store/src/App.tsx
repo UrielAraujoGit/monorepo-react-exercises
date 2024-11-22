@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import { ProductsContainer } from "./components/products-container";
 import { TProduct } from "./models/product.type";
 
 function App() {
@@ -18,14 +19,7 @@ function App() {
   return (
     <>
       <h1 className="text-center text-3xl">fake store</h1>
-      {products.map((prod) => (
-        <div key={prod.id}>
-          <p>{prod.title}</p>
-          <img src={prod.image} alt={prod.title} />
-          <p>{prod.description}</p>
-          <p>{prod.price}</p>
-        </div>
-      ))}
+      <ProductsContainer productList={products}></ProductsContainer>
     </>
   );
 }
