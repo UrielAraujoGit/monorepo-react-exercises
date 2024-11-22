@@ -1,5 +1,5 @@
 import { TProductMini } from "../models/product.type";
-import { MiniCardProduct } from "./card-product";
+import { MiniCardProduct } from "./mini-card-product";
 
 export const ProductsContainer = (props: {
   productList: Array<TProductMini>;
