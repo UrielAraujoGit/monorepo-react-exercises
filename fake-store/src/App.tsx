@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { ProductsContainer } from "./components/products-container";
-import { TProduct } from "./models/product.type";
+import { TProduct, TProductMini } from "./models/product.type";
+import { productMinifier } from "./utils/product-minifier.util";
 
 function App() {
-  const [products, setProducts] = useState<Array<TProduct>>([]);
+  const [products, setProducts] = useState<Array<TProductMini>>([]);
 
   const getProducts = async () => {
     const response = await fetch("https://fakestoreapi.com/products");
-    const data = await response.json();
-    setProducts(data);
+    const data: Array<TProduct> = await response.json();
+    setProducts(data.map(productMinifier));
   };
 
   useEffect(() => {
