@@ -2,6 +2,10 @@ export type TFilters = { [key: string]: TFilter };
 
 export type TFilter = { [key: string]: boolean };
 
+export type TFilterData = {
+  type: string;
+  value: string;
+};
 const filterRole: TFilter = { Frontend: true, Backend: false };
 const filterLevel: TFilter = { Junior: false, Senior: true };
 
