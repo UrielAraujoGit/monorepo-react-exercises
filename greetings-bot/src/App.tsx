@@ -3,7 +3,11 @@ import "./App.css";
 function App() {
   return (
     <>
-      <h1 className="text-center text-3xl">greetings bot</h1>
+      <button className="backround bg-red-700"  onClick={()=>{
+        console.log("Hola!")
+      }}>
+Hola soy un btn
+      </button>
     </>
   );
 }
