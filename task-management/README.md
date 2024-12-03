@@ -1,50 +1,41 @@
-# React + TypeScript + Vite
+# Monorepo ReactJS exercises
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Monorepo for ReactJs related exercises. This project use [ReactJs]() ,[Node.js](http://nodejs.org), [TypesScript](https://expressjs.com), [Vite]() and [TailwindCss]() .**
 
-Currently, two official plugins are available:
+## Content
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [About](#about)
+- [Setup](#setup)
 
-## Expanding the ESLint configuration
+<h2 id="about">About</h2>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+This monorepo has the following ReactJs projects.
 
-- Configure the top-level `parserOptions` property like this:
+- multiple-item-selector
+- get-random-color
+- get-ramdom-number
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+<h2 id="setup">Setup</h2>
+
+The following steps are needed to run any project:
+
+- Downlaod the repo
+- Install NodeJs[Node.js](https://nodejs.org)
+- Open a terminal at the root folder from the repo
+- Run the command:
+
+```console
+npm install --workspace [project-name]
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Then run this command at the desired project
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```console
+npm run dev
 ```
+
+## Contribuitors
+
+- **Elías Suárez** - [SuspiciousSchrodinger](https://github.com/SuspiciousSchrodinger)
+- **Nora Villanueva** - [VillanuevaNoraB](https://github.com/VillanuevaNoraB)
+- **Agustín Marrero** - [amarrero86mr](https://github.com/amarrero86mr)
