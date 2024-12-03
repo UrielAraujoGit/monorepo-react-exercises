@@ -21,6 +21,7 @@
     "fake-store",
     "filter-jobs",
     "video-background",
-    "get-memes"
+    "get-memes",
+    "task-management"
   ]
 }
