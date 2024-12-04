@@ -8,7 +8,7 @@ export const dataTemporaly: Array<TBoard> = [
         {
           id: 1,
           name: "To do",
-          color: "#9BC1BC",
+          color: "#F3B664",
           tasks: [
             {
               id: 1,
@@ -57,7 +57,7 @@ export const dataTemporaly: Array<TBoard> = [
         {
           id: 2,
           name: "Doing",
-          color: "#F4F1BB",
+          color: "#F1EB90",
           tasks: [
             {
               id: 2,
@@ -80,7 +80,7 @@ export const dataTemporaly: Array<TBoard> = [
         {
           id: 3,
           name: "Done",
-          color: "#F4F1BB",
+          color: "#9FBB73",
           tasks: []
         }
       ],
