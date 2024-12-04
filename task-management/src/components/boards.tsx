@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { TBoard } from "../types/board.type"
 import { StateBoard } from "./state.board"
 
@@ -6,6 +6,10 @@ import { StateBoard } from "./state.board"
 export const Boards = (props: { dataBoards: Array<TBoard> }) => {
 
     const [boardSelect, setBoardSelect] = useState<TBoard | null>(null)
+
+    useEffect(() => {
+        setBoardSelect(props.dataBoards[0])
+    }, [])
 
     return (
         <>
@@ -24,10 +28,13 @@ export const Boards = (props: { dataBoards: Array<TBoard> }) => {
             </div>
             <div className="board-container">
                 {boardSelect ?
-                    (<div>
+                    (<div className="border bg-slate-400">
                         <h3>{boardSelect?.name}</h3>
+                        <button className="border border-green-800 bg-green-500"
+                        >new state</button>
                         <StateBoard
                             dataStates={boardSelect?.states}
+
                         ></StateBoard>
                     </div>) : null}
             </div>
