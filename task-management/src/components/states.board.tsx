@@ -1,5 +1,5 @@
 import { TState } from "../types/board.type";
-import { Tasks } from "./task";
+import { Tasks } from "./tasks";
 
 
 export const StateBoard = (props: { dataStates: Array<TState> }) => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { TBoard } from "../types/board.type"
-import { StateBoard } from "./state.board"
+import { StateBoard } from "./states.board"
 
 
 export const Boards = (props: { dataBoards: Array<TBoard> }) => {

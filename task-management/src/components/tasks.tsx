@@ -1,4 +1,5 @@
 import { TTask } from "../types/board.type";
+import { SubTasks } from "./subtasks";
 
 export const Tasks = (props: {dataTask: Array<TTask>}) => {
 
@@ -9,7 +10,8 @@ export const Tasks = (props: {dataTask: Array<TTask>}) => {
                     return(
                         <div key={itemtask.id}>
                             <h3>{itemtask.name}</h3>
-                            <></>
+                            <SubTasks
+                            dataSubTasks={itemtask.subtasks}></SubTasks>
                         </div>                       
                     )
                 })}
