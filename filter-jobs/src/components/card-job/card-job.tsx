@@ -1,21 +1,10 @@
-import { TJob } from "../../models/job.type";
+import { TJobWithFlags } from "../../models/job.type";
 import { TFilterData } from "../container-jobs/filter.type";
 
-const mapFilter = (name: string, value: string) => {
-  const item: TFilterData = { type: name, value: value };
-  return item;
-};
-
 export const CardJob = (props: {
-  job: TJob;
+  job: TJobWithFlags;
   handleSetFilter: (event: TFilterData) => void;
 }) => {
-  const filters: Array<TFilterData> = [
-    { type: "role", value: props.job.role },
-    { type: "level", value: props.job.level },
-    ...props.job.tools.map((tool) => mapFilter("tool", tool)),
-    ...props.job.languages.map((lang) => mapFilter("language", lang)),
-  ];
   return (
     <>
       <div className="border border-gray-600 p-2 m-2 rounded-md flex ">
@@ -32,11 +21,11 @@ export const CardJob = (props: {
           </p>
         </div>
         <div className="tools-container flex justify-end grow gap-3">
-          {filters.map((filter) => (
+          {props.job.flags.map((flag) => (
             <BtnFilter
-              key={filter.value}
-              filter={filter}
-              handleSetFilter={() => props.handleSetFilter(filter)}
+              key={flag.value}
+              filter={flag}
+              handleSetFilter={() => props.handleSetFilter(flag)}
             ></BtnFilter>
           ))}
         </div>

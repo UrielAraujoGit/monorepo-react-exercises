@@ -1,3 +1,5 @@
+import { TFilterData } from "../components/container-jobs/filter.type";
+
 export type TJob = {
   id: number;
   company: string;
@@ -13,3 +15,5 @@ export type TJob = {
   languages: Array<string>;
   tools: Array<string>;
 };
+
+export type TJobWithFlags = TJob & { flags: Array<TFilterData> };

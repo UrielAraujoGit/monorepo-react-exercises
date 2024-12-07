@@ -1,30 +1,24 @@
 import { useState } from "react";
-import { CardJob } from "../card-job/card-job";
-import { TJob } from "../../models/job.type";
 import { JOB_LIST_DATA } from "../../api/job-list";
+import { TJobWithFlags } from "../../models/job.type";
+import { jobToFlags } from "../../utils/job-to-flags.util";
+import { CardJob } from "../card-job/card-job";
 import { TFilterData, TFilters } from "./filter.type";
 
 export const ContainerJobs = () => {
-  const [jobList, setJobList] = useState<Array<TJob>>(JOB_LIST_DATA);
+  const [jobList, setJobList] = useState<Array<TJobWithFlags>>(
+    JOB_LIST_DATA.map((job) => ({
+      ...job,
+      flags: jobToFlags(job),
+    }))
+  );
   const [filters, setFilters] = useState<TFilters>({});
 
-  const newFilters: TFilters = {
-    tools: {
-      react: true,
-      express: true,
-      tailwind: true,
-    },
-    role: {},
-    level: {},
-    languages: {
-      css: true,
-    },
-  };
-
+  const filteredJobs = filterJobs(jobList, filters);
   return (
     <>
       <div>Filters: {JSON.stringify(filters)}</div>
-      {jobList.map((item) => (
+      {filteredJobs.map((item) => (
         <CardJob
           key={item.id}
           job={item}
@@ -40,4 +34,20 @@ export const ContainerJobs = () => {
       ))}
     </>
   );
+};
+
+const filterJobs = (
+  list: Array<TJobWithFlags>,
+  filters: TFilters
+): Array<TJobWithFlags> => {
+  const result = list.filter((job) => checkJobWithFilters(job, filters));
+  return result;
+};
+
+const checkJobWithFilters = (
+  job: TJobWithFlags,
+  filters: TFilters
+): boolean => {
+  console.log("checkJobWithFilters: ", job.flags, filters);
+  return true;
 };
