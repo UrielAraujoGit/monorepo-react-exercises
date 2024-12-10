@@ -9,9 +9,9 @@ export const Boards = () => {
     const [boards, setBoards] = useState<Array<TBoard>>(dataTemporaly)
     const [boardSelect, setBoardSelect] = useState<TBoard | null>(null)
     const [btnNewBoard, setBtnNewBoard] = useState<boolean>(false)
-    const [ idToDo, setIdToDo ] = useState(1000)
+    const [idToDo, setIdToDo] = useState(1000)
 
-    const fnNewId = () => {setIdToDo(idToDo + 1)}
+    const fnNewId = () => { setIdToDo(idToDo + 1) }
     if (boards.length !== 0) {
         useEffect(() => {
             setBoardSelect(boards[0])
@@ -46,7 +46,7 @@ export const Boards = () => {
 
     // data & methods to state
 
-    const [states, setStates] = useState<Array<TState>>(boardSelect ? boardSelect.states : [])
+    const states = (boardSelect ? boardSelect.states : [])
 
     const fnNewState = (nameNewState: string): void => {
         if (nameNewState === undefined || nameNewState.trim() === "") {
@@ -69,9 +69,6 @@ export const Boards = () => {
             tasks: []
         };
 
-
-        setStates((prevItems) => [...prevItems, newDataState ])
-
         setBoards((prevBoards) => {
             return prevBoards.map(board =>
                 board.id === boardSelect?.id
@@ -79,15 +76,9 @@ export const Boards = () => {
                     : board
             );
         });
-        
+
     }
 
-    
-        // useEffect(()=>{
-        //     console.log(boardSelect?.states);
-            
-        // }, [idToDo]);
-    
 
 
     return (
@@ -99,9 +90,7 @@ export const Boards = () => {
                             className="cursor-pointer"
                             key={group.id}
                             onClick={() => {
-                                setBoardSelect(group),
-                                setStates(group.states)
-
+                                setBoardSelect(group)
                             }}
                         >
                             <h2>{group.name}</h2>
@@ -115,7 +104,7 @@ export const Boards = () => {
                     (<NewBoardModal
                         fnCancel={fnCancelModal}
                         addNewBoars={fnNewBoars}
-                        
+
                     ></NewBoardModal>
                     ) : null}
             </div>
@@ -127,7 +116,7 @@ export const Boards = () => {
                         <StateBoard
                             dataStates={boardSelect?.states}
                             addNewState={fnNewState}
-                            
+
                         ></StateBoard>
                     </div>) : null}
             </div>
