@@ -40,14 +40,41 @@ const filterJobs = (
   list: Array<TJobWithFlags>,
   filters: TFilters
 ): Array<TJobWithFlags> => {
-  const result = list.filter((job) => checkJobWithFilters(job, filters));
+  const mapedFilters = filterOnlyWithActiveFlags(filters);
+  const result = list.filter((job) => checkJobWithFilters(job, mapedFilters));
   return result;
 };
 
 const checkJobWithFilters = (
   job: TJobWithFlags,
-  filters: TFilters
+  filters: [string, string[]][]
 ): boolean => {
-  console.log("checkJobWithFilters: ", job.flags, filters);
-  return true;
+  if (!filters.length) {
+    return true;
+  }
+
+  return filters.every((tupleFilter) => {
+    return (
+      !tupleFilter[1].length ||
+      tupleFilter[1].every((filterflag) => {
+        const match = job.flags.find((Jobflag) => {
+          return (
+            Jobflag.type === tupleFilter[0] && Jobflag.value === filterflag
+          );
+        });
+
+        return Boolean(match);
+      })
+    );
+  });
+};
+
+const filterOnlyWithActiveFlags = (filters: TFilters) => {
+  const result = Object.entries(filters).map((filterEntry) => [
+    filterEntry[0],
+    Object.entries(filterEntry[1])
+      .filter((entry) => entry[1])
+      .map((entry) => entry[0]),
+  ]) as Array<[string, Array<string>]>;
+  return result;
 };
