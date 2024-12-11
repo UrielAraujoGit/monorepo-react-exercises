@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { TBoard, TState } from "../types/board.type"
 import { StateBoard } from "./states.board"
 import { dataTemporaly } from "../utils/data-model"
@@ -7,20 +7,14 @@ import { NewBoardModal } from "./newboard.modal"
 
 export const Boards = () => {
     const [boards, setBoards] = useState<Array<TBoard>>(dataTemporaly)
-    const [boardSelect, setBoardSelect] = useState<TBoard | null>(null)
+    const [boardSelectedId, setBoardSelectedId] = useState<number | null>(1)
     const [btnNewBoard, setBtnNewBoard] = useState<boolean>(false)
-    const [idToDo, setIdToDo] = useState(1000)
+    const [idToDo, setIdToDo] = useState(100)
 
+    const boardSelect = boards.find((board) => board.id === boardSelectedId);
     const fnNewId = () => { setIdToDo(idToDo + 1) }
-    if (boards.length !== 0) {
-        useEffect(() => {
-            setBoardSelect(boards[0])
-        }, [])
-    }
 
-    const fnCancelModal = () => {
-        setBtnNewBoard(!btnNewBoard)
-    }
+    const fnCancelModal = () => { setBtnNewBoard(!btnNewBoard) }
 
     const fnNewBoars = (nameNewBoard: string): void => {
         if (nameNewBoard === '' || nameNewBoard === undefined || nameNewBoard.trim() === "") {
@@ -46,7 +40,7 @@ export const Boards = () => {
 
     // data & methods to state
 
-    const states = (boardSelect ? boardSelect.states : [])
+    const states = boardSelect?.states || [];
 
     const fnNewState = (nameNewState: string): void => {
         if (nameNewState === undefined || nameNewState.trim() === "") {
@@ -71,7 +65,7 @@ export const Boards = () => {
 
         setBoards((prevBoards) => {
             return prevBoards.map(board =>
-                board.id === boardSelect?.id
+                board.id === boardSelectedId
                     ? { ...board, states: [...board.states, newDataState] }
                     : board
             );
@@ -90,7 +84,7 @@ export const Boards = () => {
                             className="cursor-pointer"
                             key={group.id}
                             onClick={() => {
-                                setBoardSelect(group)
+                                setBoardSelectedId(group.id)
                             }}
                         >
                             <h2>{group.name}</h2>
