@@ -9,7 +9,7 @@ export const NewBoardModal = (props: { fnCancel: () => void; addNewBoars: (nameN
         <>
             <div>
                 <input
-                    className="border border-sky-800"
+                    className="border border-sky-800 text-gray-900 m-1 rounded-md"
                     type="text"
                     placeholder="Board Name"
                     value={nameNewBoard}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { TState } from "../types/board.type";
 import { Tasks } from "./tasks";
 import { StateModal } from "./newstate.modal";
+import { TaskModal } from "./newtask.modal";
 
 
 export const StateBoard = (props: 
@@ -12,13 +13,19 @@ export const StateBoard = (props:
     const [ btnNewStateModal, setBtnNewStateModal ] = useState(false)
     
     const onOffBtnStateModal = () => {setBtnNewStateModal(!btnNewStateModal)}
+    
+    // task modal and functions
+
+    const [ btnNewTaskModal, setBtnNewTaskModal ] = useState(false)
+    
+    const onOffBtnTaskModal = () => {setBtnNewTaskModal(!btnNewTaskModal)}
 
     
     return (
         <>
             <div>
             <button 
-            className="border border-green-800 bg-green-500"
+            className="border border-green-800 bg-green-500 text-gray-700 m-1"
             onClick={()=>{onOffBtnStateModal()}}
             >new state</button>
             {btnNewStateModal ?
@@ -43,9 +50,15 @@ export const StateBoard = (props:
                     )
                 })}
                 <button
-                    className="border border-emerald-800 bg-emerald-500"
+                    className="border border-emerald-800 bg-emerald-500 text-gray-700 m-1"
+                    onClick={()=>{onOffBtnTaskModal()}}
                 >➕ task</button>
             </div>
+            {btnNewTaskModal? 
+            <TaskModal
+                fnOnOffBtnTaskModal={onOffBtnTaskModal}
+            ></TaskModal>
+            : null}
         </>
     )
 }

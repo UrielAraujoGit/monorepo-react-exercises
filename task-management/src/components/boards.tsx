@@ -92,6 +92,7 @@ export const Boards = () => {
                     )
                 })}
                 <button
+                    className="border border-slate-400 rounded-md m-1 p-1"
                     onClick={() => { setBtnNewBoard(!btnNewBoard) }}
                 >NEW BOARD</button>
                 {btnNewBoard ?

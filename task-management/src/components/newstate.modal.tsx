@@ -12,7 +12,7 @@ export const StateModal = (props: {
     return(
         <div>
                 <input
-                    className="border border-sky-800"
+                    className="border border-sky-800 text-gray-900 m-1 rounded-md"
                     type="text"
                     placeholder="Colum Name"
                     value={addNameState}
