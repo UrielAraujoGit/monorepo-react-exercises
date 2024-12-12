@@ -1,4 +1,4 @@
-import { TSubTak as TSubTask } from "../types/board.type";
+import { TSubTask as TSubTask } from "../types/board.type";
 
 export const SubTasks = (props: { dataSubTasks: Array<TSubTask> }) => {
 
@@ -10,7 +10,7 @@ export const SubTasks = (props: { dataSubTasks: Array<TSubTask> }) => {
                         <li 
                         key={sub.id}
                         className={`subcompleted-`+sub.completed}
-                        style={sub.completed? {"color":"green"} : {"color": "red"} }
+                        style={sub.completed? {"color":"green", "background":"blue"} : {"color": "red", "background":"yellow"} }
                         >{sub.name}</li>
                     )
                 })}

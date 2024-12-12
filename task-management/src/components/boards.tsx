@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { TBoard, TState } from "../types/board.type"
+import { TBoard, TState, TSubTask, TTask } from "../types/board.type"
 import { StateBoard } from "./states.board"
 import { dataTemporaly } from "../utils/data-model"
 import { NewBoardModal } from "./newboard.modal"
@@ -37,7 +37,6 @@ export const Boards = () => {
         }
     }
 
-
     // data & methods to state
 
     const states = boardSelect?.states || [];
@@ -73,7 +72,40 @@ export const Boards = () => {
 
     }
 
+    // data & function to task & sub-task
 
+    const fnNewTasks = (nameNewTask: string, addSubTasks: Array<TSubTask>) => {
+        console.log(addSubTasks)
+        if (nameNewTask.trim() === '') return;
+        
+        
+        const existName = boardSelect?.states?.[0]?.tasks?.some(item => item.name === nameNewTask);
+        if (existName) {
+            alert("El nombre del nuevo tablero ya existe.");
+            return;
+        }
+    
+        
+        fnNewId();
+        const newDataTask: TTask = {
+            id: idToDo,
+            name: nameNewTask,
+            subtasks: addSubTasks
+        };
+    
+        setBoards((prevBoards) => {
+            return prevBoards.map(board =>
+                board.id === boardSelectedId
+                    ? { ...board, states: board.states.map((state, index) =>
+                        index === 0 
+                            ? { ...state, tasks: [...state.tasks, newDataTask] }
+                            : state
+                    )}
+                    : board
+            );
+        });
+
+    };
 
     return (
         <>
@@ -111,7 +143,9 @@ export const Boards = () => {
                         <StateBoard
                             dataStates={boardSelect?.states}
                             addNewState={fnNewState}
-
+                            fnNewId={fnNewId}
+                            idToDo={idToDo}
+                            fnNewTasks={fnNewTasks}
                         ></StateBoard>
                     </div>) : null}
             </div>

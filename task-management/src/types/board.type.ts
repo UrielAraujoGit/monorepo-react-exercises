@@ -14,10 +14,10 @@ export type TBoard = {
   export type TTask = {
     id: number;
     name: string;
-    subtasks: Array<TSubTak>;
+    subtasks: Array<TSubTask>;
   };
   
-  export type TSubTak = {
+  export type TSubTask = {
     id: number;
     name: string;
     completed: boolean;

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TState } from "../types/board.type";
+import { TState, TSubTask } from "../types/board.type";
 import { Tasks } from "./tasks";
 import { StateModal } from "./newstate.modal";
 import { TaskModal } from "./newtask.modal";
@@ -8,6 +8,9 @@ import { TaskModal } from "./newtask.modal";
 export const StateBoard = (props: 
     { dataStates: Array<TState>,
         addNewState:(nameNewState:string) => void,
+        fnNewId:()=>void,
+        idToDo:number,
+        fnNewTasks:(addNameTask:string, addSubTasks:Array<TSubTask>)=>void
         
      }) => {
     const [ btnNewStateModal, setBtnNewStateModal ] = useState(false)
@@ -32,7 +35,6 @@ export const StateBoard = (props:
                     (<StateModal
                         fnOnOffModal={onOffBtnStateModal}
                         addNewStateModal={props.addNewState}
-                        
                     ></StateModal>
                     ) : null}
             </div>
@@ -57,6 +59,9 @@ export const StateBoard = (props:
             {btnNewTaskModal? 
             <TaskModal
                 fnOnOffBtnTaskModal={onOffBtnTaskModal}
+                fnNewId={props.fnNewId}
+                idToDo={props.idToDo}
+                fnNewTasks={props.fnNewTasks}
             ></TaskModal>
             : null}
         </>
