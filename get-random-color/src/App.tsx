@@ -17,19 +17,26 @@ function App() {
 
   return (
     <>
-      <section style={{ backgroundColor: color }} className="click-me">
-        <h1
-          onClick={() => {
-            const new_color = getRandomColorRgb();
-            selectColor(new_color);
-          }}
-        >
-          Click me!
+      <section
+        style={{ backgroundColor: color }}
+        className="w-screen h-screen "
+      >
+        <h1 className="flex text-center justify-center items-center py-5">
+          <button
+            onClick={() => {
+              const new_color = getRandomColorRgb();
+              selectColor(new_color);
+            }}
+            className="border border-gray-600 p-2 rounded-md"
+          >
+            Click me!
+          </button>
         </h1>
 
         <HistoryContainer
           history={history}
           fnHandleSetColor={selectColor}
+          fnHandleChangeColors={setHistory}
         ></HistoryContainer>
       </section>
     </>
