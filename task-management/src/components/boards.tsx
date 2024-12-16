@@ -3,6 +3,7 @@ import { TBoard, TState, TSubTask, TTask } from "../types/board.type"
 import { StateBoard } from "./states.board"
 import { dataTemporaly } from "../utils/data-model"
 import { NewBoardModal } from "./newboard.modal"
+import { fnNewBoards } from "./functions/fnnewboards"
 
 
 export const Boards = () => {
@@ -16,26 +17,27 @@ export const Boards = () => {
 
     const fnCancelModal = () => { setBtnNewBoard(!btnNewBoard) }
 
-    const fnNewBoars = (nameNewBoard: string): void => {
-        if (nameNewBoard === '' || nameNewBoard === undefined || nameNewBoard.trim() === "") {
-            alert("El nombre del tablero no puede estar vacío.")
-            return
-        } else {
-            fnNewId()
-            const newDataBoar: TBoard = {
-                id: idToDo,
-                name: nameNewBoard,
-                states: []
-            }
-            const existName = boards.some(item => item.name === nameNewBoard)
-            if (!existName) {
-                setBoards((prevItems) => [...prevItems, newDataBoar])
-            } else {
-                alert("El nombre del nuevo tablero ya existe.")
-                return
-            }
-        }
-    }
+
+    // const fnNewBoards = (nameNewBoard: string): void => {
+    //     if (nameNewBoard === '' || nameNewBoard === undefined || nameNewBoard.trim() === "") {
+    //         alert("El nombre del tablero no puede estar vacío.")
+    //         return
+    //     } else {
+    //         fnNewId()
+    //         const newDataBoar: TBoard = {
+    //             id: idToDo,
+    //             name: nameNewBoard,
+    //             states: []
+    //         }
+    //         const existName = boards.some(item => item.name === nameNewBoard)
+    //         if (!existName) {
+    //             setBoards((prevItems) => [...prevItems, newDataBoar])
+    //         } else {
+    //             alert("El nombre del nuevo tablero ya existe.")
+    //             return
+    //         }
+    //     }
+    // }
 
     // data & methods to state
 
@@ -130,7 +132,11 @@ export const Boards = () => {
                 {btnNewBoard ?
                     (<NewBoardModal
                         fnCancel={fnCancelModal}
-                        addNewBoars={fnNewBoars}
+                        addNewBoars={(nameNewBoard)=>fnNewBoards(nameNewBoard,
+                            fnNewId,
+                            idToDo,
+                            boards,
+                            setBoards)}
 
                     ></NewBoardModal>
                     ) : null}
