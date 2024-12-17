@@ -29,11 +29,12 @@ export const Boards = () => {
 
   return (
     <>
+    <div className="app-container">
       <div className="asideBoardSelected">
         {boards.map((group) => {
           return (
             <div
-              className="cursor-pointer"
+              className="cursor-pointer list-boards"
               key={group.id}
               onClick={() => {
                 setBoardSelectedId(group.id);
@@ -44,7 +45,7 @@ export const Boards = () => {
           );
         })}
         <button
-          className="border border-slate-400 rounded-md m-1 p-1"
+          className="border border-slate-400 rounded-md m-1 p-1 btn-new_board"
           onClick={() => {
             setBtnNewBoard(!btnNewBoard);
           }}
@@ -63,7 +64,9 @@ export const Boards = () => {
       <div className="board-container">
         {boardSelect ? (
           <div className="border bg-slate-400">
-            <h3>{boardSelect?.name}</h3>
+            <h3
+              className="board-title"
+            >{boardSelect?.name}</h3>
 
             <StateBoard
               dataStates={boardSelect?.states}
@@ -89,6 +92,7 @@ export const Boards = () => {
               </StateBoard>
           </div>
         ) : null}
+      </div>
       </div>
     </>
   );

@@ -7,9 +7,10 @@ export const NewBoardModal = (props: { fnCancel: () => void; addNewBoars: (nameN
 
     return (
         <>
-            <div>
+            <div className="new-board-modal-container">
+                <div className="new-board-bg">
                 <input
-                    className="border border-sky-800 text-gray-900 m-1 rounded-md"
+                    className="border border-sky-800 text-gray-900 m-1 rounded-md new-board-input"
                     type="text"
                     placeholder="Board Name"
                     value={nameNewBoard}
@@ -20,12 +21,14 @@ export const NewBoardModal = (props: { fnCancel: () => void; addNewBoars: (nameN
                     onClick={() => { 
                         props.addNewBoars(nameNewBoard);
                         setNameNewBoard('')
+                        props.fnCancel()
                      }}
                 >ADD</button>
                 <button
                     className="border border-green-800"
                     onClick={() => { props.fnCancel() }}
                 >Cancel</button>
+                </div>
             </div>
         </>
     )

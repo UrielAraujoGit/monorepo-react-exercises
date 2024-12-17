@@ -1,7 +1,97 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
 body {
+    padding: 1rem;
+    padding-top: 1rem;
     background-color: #2b2c37;
     color: #fff;
-    font-family: Plus Jakarta Sans ;
+    font-family: Plus Jakarta Sans;
+}
+
+.app-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+}
+
+.asideBoardSelected {
+    grid-template-columns: 1;
+    padding: 1rem;
+}
+
+.list-boards {
+    margin: 2rem 0;
+    color: #828fa3;
+}
+
+.btn-new_board {
+    justify-self: center;
+    position: fixed;
+    bottom: 4rem;
+}
+
+/* modal add-board */
+.new-board-modal-container {
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    transition: all 1s ease-in-out;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.new-board-bg{
+    width: 24rem;
+    height: 12rem;
+    background-color: #828fa3ab;
+    border: solid 2px #828fa3;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.new-board-bg>input{
+    text-align: center;
+    width: 18rem;
+}
+.new-board-bg>button{
+    text-align: center;
+    width: 10rem;
+    background-color: #2b2c37;
+    border: solid 2px #828fa3;
+    border-radius: 1rem;
+}
+
+.board-container {
+    max-height: max-content;
+    grid-column-start: 2;
+    grid-column-end: 5;
+}
+
+.board-title {
+    padding: .5rem;
+    font-size: 1.2em;
+}
+
+.state-container{
+    height: 30rem;
+}
+.state-columns-container{
+    display: flex;
+}
+.state-columns{
+    width: 20rem;
+    height: 26rem;
+}
+.state-columns>h3{
+    color: #2b2c37;
+    font-weight: 600;
+    font-size: 1.2em;
 }

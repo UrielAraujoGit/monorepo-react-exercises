@@ -26,7 +26,7 @@ export const StateBoard = (props:
     
     return (
         <>
-            <div>
+            <div className="state-container">
             <button 
             className="border border-green-800 bg-green-500 text-gray-700 m-1"
             onClick={()=>{onOffBtnStateModal()}}
@@ -37,14 +37,13 @@ export const StateBoard = (props:
                         addNewStateModal={props.addNewState}
                     ></StateModal>
                     ) : null}
-            </div>
-            <div>
+            <div className="state-columns-container">
                 {props.dataStates.map((colums) => {
                     return (
                         <div
-                            className="state-columns"
-                            style={{ "background": colums.color }}
-                            key={colums.id}
+                        className="state-columns"
+                        style={{ "background": colums.color }}
+                        key={colums.id}
                         >
                             <h3>{colums.name}</h3>
                             <Tasks dataTask={colums.tasks}></Tasks>
@@ -54,16 +53,17 @@ export const StateBoard = (props:
                 <button
                     className="border border-emerald-800 bg-emerald-500 text-gray-700 m-1"
                     onClick={()=>{onOffBtnTaskModal()}}
-                >➕ task</button>
+                    >➕ task</button>
             </div>
             {btnNewTaskModal? 
             <TaskModal
-                fnOnOffBtnTaskModal={onOffBtnTaskModal}
-                fnNewId={props.fnNewId}
-                idToDo={props.idToDo}
-                fnNewTasks={props.fnNewTasks}
+            fnOnOffBtnTaskModal={onOffBtnTaskModal}
+            fnNewId={props.fnNewId}
+            idToDo={props.idToDo}
+            fnNewTasks={props.fnNewTasks}
             ></TaskModal>
             : null}
+            </div>
         </>
     )
 }
