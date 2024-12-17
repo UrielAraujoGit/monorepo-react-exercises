@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { TBoard, TState, TSubTask, TTask } from "../types/board.type";
+import { TBoard, TSubTask, TTask } from "../types/board.type";
 import { StateBoard } from "./states.board";
 import { dataTemporaly } from "../utils/data-model";
 import { NewBoardModal } from "./newboard.modal";
 import { fnNewBoards } from "./functions/fnnewboards";
 import { fnNewState } from "./functions/fnnewstate";
+import { fnNewTasks } from "./functions/fnnewtasks";
 
 export const Boards = () => {
   const [boards, setBoards] = useState<Array<TBoard>>(dataTemporaly);
@@ -25,42 +26,6 @@ export const Boards = () => {
 
   const states = boardSelect?.states || [];
 
-  // data & function to task & sub-task
-
-  const fnNewTasks = (nameNewTask: string, addSubTasks: Array<TSubTask>) => {
-    console.log(addSubTasks);
-    if (nameNewTask.trim() === "") return;
-
-    const existName = boardSelect?.states?.[0]?.tasks?.some(
-      (item) => item.name === nameNewTask
-    );
-    if (existName) {
-      alert("El nombre del nuevo tablero ya existe.");
-      return;
-    }
-
-    fnNewId();
-    const newDataTask: TTask = {
-      id: idToDo,
-      name: nameNewTask,
-      subtasks: addSubTasks,
-    };
-
-    setBoards((prevBoards) => {
-      return prevBoards.map((board) =>
-        board.id === boardSelectedId
-          ? {
-              ...board,
-              states: board.states.map((state, index) =>
-                index === 0
-                  ? { ...state, tasks: [...state.tasks, newDataTask] }
-                  : state
-              ),
-            }
-          : board
-      );
-    });
-  };
 
   return (
     <>
@@ -112,8 +77,16 @@ export const Boards = () => {
                 )}
               fnNewId={fnNewId}
               idToDo={idToDo}
-              fnNewTasks={fnNewTasks}
-            ></StateBoard>
+              fnNewTasks={(nameNewTask, addSubTasks)=>fnNewTasks(
+                nameNewTask,
+                addSubTasks,
+                boardSelect,
+                fnNewId,
+                idToDo,
+                setBoards,
+                boardSelectedId
+              )}>
+              </StateBoard>
           </div>
         ) : null}
       </div>

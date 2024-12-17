@@ -8,13 +8,11 @@ export const TaskModal = (props: {
     fnNewTasks:(addNameTask:string, addSubTasks:Array<TSubTask>)=>void
     
 }) => {
-    // Task
+    
     const [addNameTask, setAddNameTask] = useState<string>('')
-    // const [ newTask, setNewTask ] = useState<Array<TTask>>([])
-    // Sub Task
     const [addSubTasks, setAddSubTasks] = useState<Array<TSubTask>>([])
     const [ addNames, setAddNames ] = useState('')
-    // let namesSubTask: Array<string> = []
+    
     
     const moreSubTask = () =>{
         const existName = addSubTasks.some(item => item.name === addNames)
