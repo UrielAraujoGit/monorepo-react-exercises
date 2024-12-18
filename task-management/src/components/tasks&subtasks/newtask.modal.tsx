@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TSubTask } from "../types/board.type";
+import { TSubTask } from "../../types/board.type";
 
 export const TaskModal = (props: { 
     fnOnOffBtnTaskModal:()=>void,

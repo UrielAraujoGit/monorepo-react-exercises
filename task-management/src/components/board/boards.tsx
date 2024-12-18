@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { TBoard, TSubTask, TTask } from "../types/board.type";
-import { StateBoard } from "./states.board";
-import { dataTemporaly } from "../utils/data-model";
-import { NewBoardModal } from "./newboard.modal";
-import { fnNewBoards } from "./functions/fnnewboards";
-import { fnNewState } from "./functions/fnnewstate";
-import { fnNewTasks } from "./functions/fnnewtasks";
+import { TBoard } from "../../types/board.type";
+import { StateBoard } from "../states/states.board";
+import { dataTemporaly } from "../../utils/data-model";
+import { NewBoardModal } from "../board/newboard.modal";
+import { fnNewBoards } from "../board/fnnewboards";
+import { fnNewState } from "../states/fnnewstate";
+import { fnNewTasks } from "../tasks&subtasks/fnnewtasks";
 
 export const Boards = () => {
   const [boards, setBoards] = useState<Array<TBoard>>(dataTemporaly);

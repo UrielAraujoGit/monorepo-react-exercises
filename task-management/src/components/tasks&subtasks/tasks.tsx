@@ -1,4 +1,4 @@
-import { TTask } from "../types/board.type";
+import { TTask } from "../../types/board.type";
 import { SubTasks } from "./subtasks";
 
 export const Tasks = (props: {dataTask: Array<TTask>}) => {

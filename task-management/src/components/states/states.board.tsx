@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { TState, TSubTask } from "../types/board.type";
-import { Tasks } from "./tasks";
+import { TState, TSubTask } from "../../types/board.type";
+import { Tasks } from "../tasks&subtasks/tasks";
 import { StateModal } from "./newstate.modal";
-import { TaskModal } from "./newtask.modal";
+import { TaskModal } from "../tasks&subtasks/newtask.modal";
 
 
 export const StateBoard = (props: 
