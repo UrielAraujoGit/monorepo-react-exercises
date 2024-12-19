@@ -1,20 +1,12 @@
-import { useEffect } from "react";
 import "./App.css";
-import { getApiRandomImgs } from "./services/api.service";
+import { CollectionPage } from "./components/collection/collection.page";
+import { NavBar } from "./components/shared/navbar";
 
 function App() {
-  const getRandomImgs = async () => {
-    const imgs = await getApiRandomImgs();
-    console.log(imgs);
-  };
-
-  useEffect(() => {
-    getRandomImgs();
-  }, []);
-
   return (
     <>
-      <h1 className="text-center text-3xl">unsplash</h1>
+      <NavBar></NavBar>
+      <CollectionPage></CollectionPage>
     </>
   );
 }
