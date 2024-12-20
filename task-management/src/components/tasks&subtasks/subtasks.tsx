@@ -9,8 +9,8 @@ export const SubTasks = (props: { dataSubTasks: Array<TSubTask> }) => {
                     return (
                         <li 
                         key={sub.id}
-                        className={`subcompleted-`+sub.completed}
-                        style={sub.completed? {"color":"green", "background":"blue"} : {"color": "red", "background":"yellow"} }
+                        className={`subtasks-item-list subcompleted-`+sub.completed}
+                        style={sub.completed? {"color":"green"} : {"color": "red"} }
                         >{sub.name}</li>
                     )
                 })}

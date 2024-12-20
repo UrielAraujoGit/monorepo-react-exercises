@@ -21,8 +21,8 @@ export const StateModal = (props: {
                 <button
                     className="border border-green-800"
                     onClick={() => {props.addNewStateModal(addNameState);
-                        setAddNameState('');
-                        
+                        setAddNameState('')
+                        props.fnOnOffModal()
                     }}
                 >ADD</button>
                 <button

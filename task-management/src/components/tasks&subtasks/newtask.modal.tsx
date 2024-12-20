@@ -34,7 +34,7 @@ export const TaskModal = (props: {
     return (
         <>
             <div 
-            className="flex flex-col w-52"
+            className="flex flex-col w-52 "
             >
                 <input
                     className="border border-sky-800 text-gray-900 rounded-md m-1"
@@ -67,7 +67,9 @@ export const TaskModal = (props: {
                 >+ Sub Task</button>
                 <button
                     className="border border-green-800"
-                    onClick={() => props.fnNewTasks(addNameTask, addSubTasks)}
+                    onClick={() => {props.fnNewTasks(addNameTask, addSubTasks)
+                        props.fnOnOffBtnTaskModal()
+                    }}
                 >ADD Task</button>
                 <button
                     className="border border-green-800"
