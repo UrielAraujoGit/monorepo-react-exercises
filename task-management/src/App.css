@@ -16,6 +16,7 @@ body {
 
 .asideBoardSelected {
     grid-template-columns: 1;
+    
     padding: 1rem;
 }
 
@@ -82,9 +83,13 @@ body {
 
 .state-container{
     height: 30rem;
+    overflow-x: scroll;
+    min-height: 100vh;
+    scrollbar-width: none;
 }
 .state-columns-container{
     display: flex;
+    
 }
 .state-columns{
     width: 20rem;

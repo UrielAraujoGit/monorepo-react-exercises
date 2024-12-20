@@ -1,0 +1,19 @@
+
+.task-container{
+    
+}
+
+.task-card {
+    background-color: #2b2c37;
+    margin: .3rem;
+    padding: .3rem;
+    border-radius: .3rem;
+}
+.task-card>p{
+    color: #828fa3;
+    font-size: .9rem;
+}
+
+.subtasks-item-list{
+    font-size: .8rem;
+}
