@@ -13,3 +13,7 @@ export const getApiKey = () => {
 
   return JSON.parse(API_KEY);
 };
+
+export const authResolver = () => {
+  return { Authorization: "Client-ID " + getApiKey() };
+};

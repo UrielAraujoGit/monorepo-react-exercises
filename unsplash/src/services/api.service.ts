@@ -1,12 +1,10 @@
-import { TCollection } from "../models/collection.type";
-import { BASE_URL, getApiKey } from "../utils/auth.util";
+import { TCollection, TPhoto } from "../models/collection.type";
+import { fetchResolver } from "../utils/fetch-api.util";
 
 export const getApiRandomCollection = async () => {
-  const response = await fetch(BASE_URL + "/collections", {
-    headers: {
-      Authorization: "Client-ID " + getApiKey(),
-    },
-  });
-  const result: Array<TCollection> = await response.json();
-  return result;
+  return fetchResolver<Array<TCollection>>("collections");
+};
+
+export const getApiCollectionById = async (id: string) => {
+  return fetchResolver<Array<TPhoto>>(`collections/${id}/photos`);
 };
