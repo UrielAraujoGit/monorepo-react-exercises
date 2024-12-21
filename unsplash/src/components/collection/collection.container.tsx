@@ -6,7 +6,7 @@ export const CollectionContainer = (props: {
   collections: Array<TCollection>;
 }) => {
   return (
-    <div className="collection-container">
+    <div className="collection-container grid grid-cols-3 gap-3">
       {props.collections.map((collection) => (
         <CollectionCard
           key={collection.id}
