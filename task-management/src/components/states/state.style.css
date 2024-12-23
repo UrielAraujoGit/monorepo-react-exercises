@@ -1,0 +1,8 @@
+.btn-new-task{
+    position: absolute;
+    top: .5rem;
+    right: 1rem;
+    padding: .3rem;
+    margin: .2rem;
+    border-radius: .4rem;
+}
