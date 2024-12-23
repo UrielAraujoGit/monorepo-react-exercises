@@ -81,22 +81,3 @@ body {
     font-size: 1.2em;
 }
 
-.state-container{
-    height: 30rem;
-    overflow-x: scroll;
-    min-height: 100vh;
-    scrollbar-width: none;
-}
-.state-columns-container{
-    display: flex;
-    
-}
-.state-columns{
-    width: 20rem;
-    height: 26rem;
-}
-.state-columns>h3{
-    color: #2b2c37;
-    font-weight: 600;
-    font-size: 1.2em;
-}
