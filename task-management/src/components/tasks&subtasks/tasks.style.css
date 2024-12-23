@@ -1,8 +1,3 @@
-
-.task-container{
-    
-}
-
 .task-card {
     background-color: #2b2c37;
     margin: .3rem;
@@ -16,4 +11,46 @@
 
 .subtasks-item-list{
     font-size: .8rem;
+}
+
+/* modal add-task */
+.new-task-modal-container {
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    transition: all 1s ease-in-out;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.new-task-form{
+    width: 24rem;
+    padding: 1rem;
+    background-color: #828fa3ab;
+    border: solid 2px #828fa3;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.new-task-form>input{
+    text-align: center;
+    width: 18rem;
+}
+.new-task-form>button{
+    text-align: center;
+    width: 10rem;
+    background-color: #2b2c37;
+    border: solid 2px #828fa3;
+    border-radius: 1rem;
+}
+.new-task-form>ul>li {
+    color: #2b2c37;
 }
