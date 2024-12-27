@@ -8,6 +8,7 @@ import { fnNewState } from "../states/fnnewstate";
 import { fnNewTasks } from "../tasks&subtasks/fnnewtasks";
 import menuIcon from "../../public/icons/menu-icon.png"
 import { MenuBoardModal } from "./menuboard.modal";
+import { fnOrderColumns } from "./fnmenuboard";
 
 export const Boards = () => {
   const [boards, setBoards] = useState<Array<TBoard>>(dataTemporaly);
@@ -16,6 +17,7 @@ export const Boards = () => {
   const [idToDo, setIdToDo] = useState(100);
 
   const boardSelect = boards.find((board) => board.id === boardSelectedId);
+  
   const fnNewId = () => {
     setIdToDo(idToDo + 1);
   };
@@ -84,6 +86,10 @@ export const Boards = () => {
               (<div><MenuBoardModal
                 boardSelected={boardSelect}
                 fnSetMenuModalBoard={fnSetMenuModalBoard}
+                fnOrderColumns={() => fnOrderColumns}
+                setBoards={()=> setBoards}
+                boardSelectedId={boardSelectedId||1}
+                boards={boards}
               ></MenuBoardModal></div>) : null }
               
               <StateBoard

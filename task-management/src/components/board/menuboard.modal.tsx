@@ -1,28 +1,33 @@
 import { useState } from "react"
 import { TBoard, TState } from "../../types/board.type"
+import { fnOrderColumns } from "./fnmenuboard"
 
 export const MenuBoardModal = (
     props: { boardSelected: TBoard,
         fnSetMenuModalBoard:()=>void,
+        fnOrderColumns:()=>void,
+        setBoards: ()=> void,
+        boardSelectedId: number
+        boards:TBoard[]
      }
 ) => {
 
-    const [ showBoard, setShowBoard ] = useState(props.boardSelected)
-    const fnOrderColumns = (column: TState) => {
+    const [ showBoard, setShowBoard ] = useState(props.boards[props.boardSelectedId - 1])
+    // const fnOrderColumns = (column: TState) => {
         
-        const newColumns = [...showBoard.states];
-        const currentIndex = newColumns.indexOf(column);
+    //     const newColumns = [...showBoard.states];
+    //     const currentIndex = newColumns.indexOf(column);
             
-        if (currentIndex > 0) {
-            [newColumns[currentIndex - 1], newColumns[currentIndex]] = 
-            [newColumns[currentIndex], newColumns[currentIndex - 1]];
-        }
+    //     if (currentIndex > 0) {
+    //         [newColumns[currentIndex - 1], newColumns[currentIndex]] = 
+    //         [newColumns[currentIndex], newColumns[currentIndex - 1]];
+    //     }
     
-        setShowBoard((prev) => ({
-            ...prev,
-            states: newColumns,
-        }));
-    };
+    //     setShowBoard((prev) => ({
+    //         ...prev,
+    //         states: newColumns
+    //     }));
+    // };
 
     return (
         <>
@@ -38,8 +43,16 @@ export const MenuBoardModal = (
                     {showBoard.states.map((colums) => {
                         return (
                             <div key={colums.id}>
-                                {showBoard.states.indexOf(colums)? <button
-                                onClick={()=>{fnOrderColumns(colums)}}
+                                {showBoard.states.indexOf(colums)? 
+                                <button
+                                onClick={()=>{fnOrderColumns(
+                                    colums,
+                                    showBoard,
+                                    setShowBoard,
+                                    props.setBoards,
+                                    props.boardSelectedId,
+                                    props.boards
+                                )}}
                                 >^up^</button>: null}
                             <input
                                 type="text"
