@@ -11,29 +11,31 @@ export const fnOrderColumns = (
     
 ) => {
         
-        const newColumns = [...showBoard.states];
-        const currentIndex = newColumns.indexOf(column);
-            
-        if (currentIndex > 0) {
-            [newColumns[currentIndex - 1], newColumns[currentIndex]] = 
-            [newColumns[currentIndex], newColumns[currentIndex - 1]];
-        }
+        const newColumns = [...showBoard.states]
+        const indice = showBoard.states.indexOf(column)
+
+        newColumns.sort((a, b) => {
+            if (a === column && showBoard.states.indexOf(b) === indice - 1) {
+              return -1; // Mover el elemento hacia la izquierda
+            }
+            if (b === column && showBoard.states.indexOf(a) === indice - 1) {
+              return 1; // Dejar que el elemento previo tome la posición derecha
+            }
+            return showBoard.states.indexOf(a) - showBoard.states.indexOf(b); // Mantener el orden original
+          });
+        
     
         
         setShowBoard((prev) => ({
             ...prev,
             states: newColumns
         }));
-        
-        console.log(newColumns)
-        
+                
         setBoards((prevBoards) => {
             return prevBoards.map((board) =>
               board.id === boardSelectedId
                 ? { ...board, states: newColumns }
                 : board
             );
-        });
-
-        console.log(boards)
+        });    
     };

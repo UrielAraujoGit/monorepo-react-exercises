@@ -87,7 +87,7 @@ export const Boards = () => {
                 boardSelected={boardSelect}
                 fnSetMenuModalBoard={fnSetMenuModalBoard}
                 fnOrderColumns={() => fnOrderColumns}
-                setBoards={()=> setBoards}
+                setBoards={setBoards}
                 boardSelectedId={boardSelectedId||1}
                 boards={boards}
               ></MenuBoardModal></div>) : null }

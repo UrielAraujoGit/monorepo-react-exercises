@@ -6,7 +6,7 @@ export const MenuBoardModal = (
     props: { boardSelected: TBoard,
         fnSetMenuModalBoard:()=>void,
         fnOrderColumns:()=>void,
-        setBoards: ()=> void,
+        setBoards: React.Dispatch<React.SetStateAction<TBoard[]>>,
         boardSelectedId: number
         boards:TBoard[]
      }
