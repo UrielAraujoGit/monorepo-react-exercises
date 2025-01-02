@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { TBoard, TState } from "../../types/board.type"
-import { fnOrderColumns } from "./fnmenuboard"
+import { fnEditMenuBoard, fnOrderColumns } from "./fnmenuboard"
 
 export const MenuBoardModal = (
     props: { boardSelected: TBoard,
@@ -9,6 +9,7 @@ export const MenuBoardModal = (
         setBoards: React.Dispatch<React.SetStateAction<TBoard[]>>,
         boardSelectedId: number
         boards:TBoard[]
+        fnEditMenuBoard:()=>void
      }
 ) => {
 
@@ -64,7 +65,11 @@ export const MenuBoardModal = (
                     <button
                         className="border border-green-800"
                         onClick={()=> {
-                            
+                            fnEditMenuBoard(
+                                props.setBoards,
+                                props.boardSelectedId,
+                                showBoard
+                            );
                             props.fnSetMenuModalBoard() }}
                     >Edit</button>
                     <button
