@@ -6,5 +6,15 @@ export const getApiRandomCollection = async () => {
 };
 
 export const getApiCollectionById = async (id: string) => {
-  return fetchResolver<Array<TPhoto>>(`collections/${id}/photos`);
+  return fetchResolver<TCollection>(`collections/${id}`);
+};
+
+export const getApiCollectionPhotosById = async (
+  id: string,
+  page = 1,
+  perPage = 10
+) => {
+  return fetchResolver<Array<TPhoto>>(
+    `collections/${id}/photos?page=${page}&per_page=${perPage}`
+  );
 };
