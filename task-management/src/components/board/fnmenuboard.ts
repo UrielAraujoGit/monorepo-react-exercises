@@ -36,12 +36,43 @@ export const fnOrderColumns = (
   // });
 };
 
+export const fnChangeNameBoard = (
+  nameBoard: string,
+  boards: Array<TBoard>,
+  setBoards: (value: React.SetStateAction<TBoard[]>) => void,
+  boardSelectedId: number,
+  showBoard: TBoard
+) => {
+  if (
+    nameBoard === undefined ||
+    nameBoard.trim() === ""
+  ) {
+    alert("El nombre del tablero no puede estar vacío.");
+    return;
+  }
+
+  const existName = boards.some((item) => item.name ===     nameBoard);
+    if (!existName) {
+      setBoards((prevBoards) => {
+        return prevBoards.map((board) =>
+          board.id === boardSelectedId
+            ? { ...board, name: nameBoard }
+            : board
+        );
+      })
+    } else {
+      alert("El nombre del nuevo tablero ya existe.");
+      return;
+    }
+
+}
+
 export const fnEditMenuBoard = (
   setBoards: React.Dispatch<React.SetStateAction<TBoard[]>>,
   boardSelectedId: number,
   showBoard: TBoard
 ) => {
-  
+
   setBoards((prevBoards) => {
     return prevBoards.map((board) =>
       board.id === boardSelectedId

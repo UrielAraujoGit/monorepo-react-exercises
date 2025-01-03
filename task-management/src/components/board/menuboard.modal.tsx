@@ -30,6 +30,8 @@ export const MenuBoardModal = (
     //     }));
     // };
 
+    const [ nameBoard, setNameBoarld ] = useState('')
+    
     return (
         <>
             <div className="new-task-modal-container">
@@ -50,9 +52,6 @@ export const MenuBoardModal = (
                                     colums,
                                     showBoard,
                                     setShowBoard,
-                                    props.setBoards,
-                                    props.boardSelectedId,
-                                    props.boards
                                 )}}
                                 >^up^</button>: null}
                             <input
