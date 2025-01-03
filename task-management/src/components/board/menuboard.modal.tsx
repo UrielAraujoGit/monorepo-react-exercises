@@ -1,37 +1,25 @@
 import { useState } from "react"
 import { TBoard, TState } from "../../types/board.type"
-import { fnEditMenuBoard, fnOrderColumns } from "./fnmenuboard"
+import { fnChangeNameBoard, fnEditMenuBoard, fnOrderColumns } from "./fnmenuboard"
 
 export const MenuBoardModal = (
-    props: { boardSelected: TBoard,
+    props: { 
+        boardSelected: TBoard,
         fnSetMenuModalBoard:()=>void,
         fnOrderColumns:()=>void,
         setBoards: React.Dispatch<React.SetStateAction<TBoard[]>>,
         boardSelectedId: number
         boards:TBoard[]
+        fnChangeNameBoard:()=>void
         fnEditMenuBoard:()=>void
      }
 ) => {
 
-    const [ showBoard, setShowBoard ] = useState(props.boards[props.boardSelectedId - 1])
-    // const fnOrderColumns = (column: TState) => {
-        
-    //     const newColumns = [...showBoard.states];
-    //     const currentIndex = newColumns.indexOf(column);
-            
-    //     if (currentIndex > 0) {
-    //         [newColumns[currentIndex - 1], newColumns[currentIndex]] = 
-    //         [newColumns[currentIndex], newColumns[currentIndex - 1]];
-    //     }
-    
-    //     setShowBoard((prev) => ({
-    //         ...prev,
-    //         states: newColumns
-    //     }));
-    // };
+    const boardShow = props.boards.find((item) => item.id === props.boardSelectedId)
+    const [ showBoard, setShowBoard ] = useState(boardShow!)
+   
 
-    const [ nameBoard, setNameBoarld ] = useState('')
-    
+
     return (
         <>
             <div className="new-task-modal-container">
@@ -42,6 +30,16 @@ export const MenuBoardModal = (
                         className="border border-sky-800 text-gray-900 rounded-md m-1"
                         type="text"
                         placeholder={showBoard.name}
+                        value={showBoard.name}
+                        onChange={(e)=> {
+                            const newName=(e.currentTarget.value);
+                            fnChangeNameBoard(
+                                newName,
+                                props.boards,
+                                setShowBoard,
+                                showBoard
+                            )  
+                        }}
                     />
                     {showBoard.states.map((colums) => {
                         return (
@@ -64,6 +62,7 @@ export const MenuBoardModal = (
                     <button
                         className="border border-green-800"
                         onClick={()=> {
+                              
                             fnEditMenuBoard(
                                 props.setBoards,
                                 props.boardSelectedId,

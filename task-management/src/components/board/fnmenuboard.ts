@@ -37,34 +37,32 @@ export const fnOrderColumns = (
 };
 
 export const fnChangeNameBoard = (
-  nameBoard: string,
+  newName:string,
   boards: Array<TBoard>,
-  setBoards: (value: React.SetStateAction<TBoard[]>) => void,
-  boardSelectedId: number,
+  setShowBoard: React.Dispatch<React.SetStateAction<TBoard>>,
   showBoard: TBoard
 ) => {
-  if (
-    nameBoard === undefined ||
-    nameBoard.trim() === ""
+  
+  const newNameBoard: string = newName? newName : showBoard.name
+  const existName = boards.some((item) => item.name ===     newNameBoard);
+  if (existName && newNameBoard !== showBoard.name) {
+    alert("El nombre del nuevo tablero ya existe.");
+    return;
+  } else if (
+    newNameBoard === undefined ||
+    newNameBoard.trim() === ""
   ) {
     alert("El nombre del tablero no puede estar vacío.");
     return;
   }
-
-  const existName = boards.some((item) => item.name ===     nameBoard);
-    if (!existName) {
-      setBoards((prevBoards) => {
-        return prevBoards.map((board) =>
-          board.id === boardSelectedId
-            ? { ...board, name: nameBoard }
-            : board
-        );
-      })
-    } else {
-      alert("El nombre del nuevo tablero ya existe.");
-      return;
-    }
-
+  
+  
+  setShowBoard((prev) => ({
+    ...prev,
+    name: newNameBoard
+  }));
+  
+  
 }
 
 export const fnEditMenuBoard = (
@@ -72,12 +70,12 @@ export const fnEditMenuBoard = (
   boardSelectedId: number,
   showBoard: TBoard
 ) => {
-
+  console.log(showBoard.name)
   setBoards((prevBoards) => {
     return prevBoards.map((board) =>
       board.id === boardSelectedId
-        ? { ...board, states: showBoard.states }
+        ? {...board, states: showBoard.states, name: showBoard.name }
         : board
     );
   })
-}
+};
