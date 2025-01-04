@@ -5,6 +5,7 @@ import {
   getApiCollectionPhotosById,
 } from "../../../services/api.service";
 import { CollectionPhotoCard } from "./collection-photo.card";
+import { Pagination } from "../../shared/pagination";
 
 export const CollectionPhotoContainer = (props: { id: string }) => {
   const [collection, setCollection] = useState<TCollection | null>(null);
@@ -12,14 +13,21 @@ export const CollectionPhotoContainer = (props: { id: string }) => {
 
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
+  const totalPages = collection
+    ? Math.ceil(collection?.total_photos / perPage)
+    : 0;
 
   const getCollectionById = async (id: string) => {
     const collection_data = await getApiCollectionById(id);
     setCollection(collection_data);
   };
 
-  const getCollectionPhotosById = async (id: string) => {
-    const photos_data = await getApiCollectionPhotosById(id, page);
+  const getCollectionPhotosById = async (
+    id: string,
+    page: number,
+    perPage: number
+  ) => {
+    const photos_data = await getApiCollectionPhotosById(id, page, perPage);
     setPhotos(photos_data);
   };
 
@@ -28,8 +36,8 @@ export const CollectionPhotoContainer = (props: { id: string }) => {
   }, [props.id]);
 
   useEffect(() => {
-    getCollectionPhotosById(props.id);
-  }, [page]);
+    getCollectionPhotosById(props.id, page, perPage);
+  }, [props.id, page, perPage]);
 
   return (
     <>
@@ -46,16 +54,14 @@ export const CollectionPhotoContainer = (props: { id: string }) => {
             />
           ))}
         </div>
-        <p>
-          page {page} -
-          {collection ? Math.ceil(collection?.total_photos / perPage) : 0}
-        </p>
 
-        <input
-          type="number"
-          onChange={(e) => setPage(Number(e.currentTarget.value))}
-          value={page}
-        />
+        <Pagination
+          page={page}
+          perPage={perPage}
+          totalPages={totalPages}
+          fnHandleChangePage={(newpage) => setPage(newpage)}
+          fnHandleChangePerPage={(newPerPage) => setPerPage(newPerPage)}
+        ></Pagination>
       </div>
     </>
   );
