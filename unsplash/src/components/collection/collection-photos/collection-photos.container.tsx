@@ -6,8 +6,11 @@ import {
 } from "../../../services/api.service";
 import { CollectionPhotoCard } from "./collection-photo.card";
 import { Pagination } from "../../shared/pagination";
+import { useParams } from "react-router";
 
-export const CollectionPhotoContainer = (props: { id: string }) => {
+export const CollectionPhotoContainer = () => {
+  const id = useParams().id;
+
   const [collection, setCollection] = useState<TCollection | null>(null);
   const [photos, setPhotos] = useState<Array<TPhoto>>([]);
 
@@ -32,12 +35,16 @@ export const CollectionPhotoContainer = (props: { id: string }) => {
   };
 
   useEffect(() => {
-    getCollectionById(props.id);
-  }, [props.id]);
+    if (typeof id !== "undefined") {
+      getCollectionById(id);
+    }
+  }, [id]);
 
   useEffect(() => {
-    getCollectionPhotosById(props.id, page, perPage);
-  }, [props.id, page, perPage]);
+    if (typeof id !== "undefined") {
+      getCollectionPhotosById(id, page, perPage);
+    }
+  }, [id, page, perPage]);
 
   return (
     <>
@@ -45,12 +52,12 @@ export const CollectionPhotoContainer = (props: { id: string }) => {
         <h5>Collection: {collection?.title}</h5>
         <p>photos: {collection?.total_photos}</p>
 
-        <div className="collection-photos-list">
+        <div className="collection-photos-list flex flex-wrap gap-2">
           {photos.map((photo) => (
             <CollectionPhotoCard
               key={photo.id}
               img_url={photo.urls.regular!}
-              className="w-40"
+              className="w-40 object-cover"
             />
           ))}
         </div>
