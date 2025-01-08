@@ -8,7 +8,7 @@ import { fnNewState } from "../states/fnnewstate";
 import { fnNewTasks } from "../tasks&subtasks/fnnewtasks";
 import menuIcon from "../../public/icons/menu-icon.png"
 import { MenuBoardModal } from "./menuboard.modal";
-import { fnChangeNameBoard, fnEditMenuBoard, fnOrderColumns } from "./fnmenuboard";
+import { fnChangeNameBoard, fnChangeNameColums, fnEditMenuBoard, fnOrderColumns } from "./fnmenuboard";
 
 export const Boards = () => {
   const [boards, setBoards] = useState<Array<TBoard>>(dataTemporaly);
@@ -92,6 +92,7 @@ export const Boards = () => {
                 boards={boards}
                 fnChangeNameBoard={()=>fnChangeNameBoard}
                 fnEditMenuBoard={()=> fnEditMenuBoard}
+                fnChangeNameColums={()=> fnChangeNameColums}
               ></MenuBoardModal></div>) : null }
               
               <StateBoard

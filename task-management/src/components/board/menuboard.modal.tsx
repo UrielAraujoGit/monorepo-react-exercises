@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { TBoard, TState } from "../../types/board.type"
-import { fnChangeNameBoard, fnEditMenuBoard, fnOrderColumns } from "./fnmenuboard"
+import { fnChangeNameBoard, fnChangeNameColums, fnEditMenuBoard, fnOrderColumns } from "./fnmenuboard"
 
 export const MenuBoardModal = (
     props: { 
@@ -12,6 +12,7 @@ export const MenuBoardModal = (
         boards:TBoard[]
         fnChangeNameBoard:()=>void
         fnEditMenuBoard:()=>void
+        fnChangeNameColums:()=>void
      }
 ) => {
 
@@ -46,6 +47,7 @@ export const MenuBoardModal = (
                             <div key={colums.id}>
                                 {showBoard.states.indexOf(colums)? 
                                 <button
+                                className="border border-sky-800 bg-slate-500 text-gray-900 rounded-md m-1"
                                 onClick={()=>{fnOrderColumns(
                                     colums,
                                     showBoard,
@@ -53,9 +55,21 @@ export const MenuBoardModal = (
                                 )}}
                                 >^up^</button>: null}
                             <input
+                                className="border border-sky-800 text-gray-900 rounded-md m-1"
                                 type="text"
                                 placeholder={colums.name}
+                                value={colums.name}
+                                onChange={(e)=>{
+                                    const newName=(e.currentTarget.value);
+                                    fnChangeNameColums(
+                                        colums,
+                                        newName,
+                                        props.boardSelected,
+                                        setShowBoard
+                                    )
+                                }}
                             />
+                            
                             </div>
                             )}
                     )}

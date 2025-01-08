@@ -45,7 +45,7 @@ export const fnChangeNameBoard = (
   
   const newNameBoard: string = newName? newName : showBoard.name
   const existName = boards.some((item) => item.name ===     newNameBoard);
-  if (existName && newNameBoard !== showBoard.name) {
+  if (existName ) {
     alert("El nombre del nuevo tablero ya existe.");
     return;
   } else if (
@@ -61,8 +61,41 @@ export const fnChangeNameBoard = (
     ...prev,
     name: newNameBoard
   }));
+}
+
+export const fnChangeNameColums = (
+  colums: TState,
+  newName:string,
+  boardSelected: TBoard,
+  setShowBoard: React.Dispatch<React.SetStateAction<TBoard>>,
+) => {
+  
+  const newNameColum: string = newName? newName : colums.name
+  const existName = boardSelected.states.some((item) => item.name === newNameColum);
+  if (existName) {
+    alert("El nombre del nuevo tablero ya existe.");
+    return;
+  } else if (
+    newNameColum === undefined ||
+    newNameColum.trim() === ""
+  ) {
+    alert("El nombre del tablero no puede estar vacío.");
+    return;
+  }
   
   
+  setShowBoard(prevBoard => {
+    const updatedStates = prevBoard.states.map(state =>
+        state.id === colums.id
+            ? { ...state, name: newName } 
+            : state 
+    );
+
+    return {
+        ...prevBoard,
+        states: updatedStates, 
+    };
+});
 }
 
 export const fnEditMenuBoard = (
