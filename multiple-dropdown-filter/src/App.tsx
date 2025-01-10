@@ -20,13 +20,16 @@ function App() {
       </header>
       <section>
         <h2>Lista de Contactos a Seleccioinar</h2>
-        <ul>
+        <ul className="m-4">
 
           {list.map(item => {
             return(
-              <li>
-                <p>{item.nombre}</p>
-                <img src={`https://picsum.photos/id/1${item.id}/200/200`} alt="Avatar de contacto" />
+              <li className="flex gap-2 items-center m-3">
+                <img
+                 className="border-cyan-800 rounded-full"
+                 src={`https://picsum.photos/id/1${item.id}/100/100`} 
+                 alt="Avatar de contacto" />
+                <p className="">{item.nombre}</p>
               </li>
 
             )
