@@ -1,9 +1,38 @@
+import { useEffect, useState } from "react";
 import "./App.css";
+import { TContactList } from "./models/contacts-list.type";
+import { contactList } from "./utils/contact-list";
 
 function App() {
+
+  const [ list, setList ] = useState<TContactList>([])
+
+  useEffect(()=>{
+      setList(contactList)
+    },
+  )
+
+
   return (
     <>
-      <h1 className="text-center text-3xl">Multiple Dropdown Filter</h1>
+      <header>
+        <h1 className="text-center text-3xl">Multiple Dropdown Filter</h1>
+      </header>
+      <section>
+        <h2>Lista de Contactos a Seleccioinar</h2>
+        <ul>
+
+          {list.map(item => {
+            return(
+              <li>
+                <p>{item.nombre}</p>
+                <img src={`https://picsum.photos/id/1${item.id}/200/200`} alt="Avatar de contacto" />
+              </li>
+
+            )
+          })}
+        </ul>
+      </section>
     </>
   );
 }
