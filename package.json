@@ -22,6 +22,7 @@
     "filter-jobs",
     "video-background",
     "get-memes",
-    "task-management"
+    "task-management",
+    "multiple-dropdown-filter"
   ]
 }
