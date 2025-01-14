@@ -1,4 +1,5 @@
 import { numberToArray } from "../../utils/number-to-array.util";
+import { sortPagination } from "../../utils/sort-pagination.util";
 
 type TPaginationProps = {
   page: number;
@@ -23,7 +24,11 @@ export const Pagination = (
           page: {props.page} - {props.totalPages}
         </div>
         <div className="flex flex-wrap gap-1">
-          {numberToArray(props.totalPages).map((n) => (
+          {sortPagination(
+            numberToArray(props.totalPages),
+            props.page,
+            props.perPage
+          ).map((n) => (
             <button
               key={n}
               onClick={() => props.fnHandleChangePage(n)}
