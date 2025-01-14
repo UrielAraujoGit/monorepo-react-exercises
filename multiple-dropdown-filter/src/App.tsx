@@ -1,17 +1,38 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import { TContactList } from "./models/contacts-list.type";
 import { contactList } from "./utils/contact-list";
+import { ListaAvtives } from "./components/lista-actives";
 
 function App() {
 
-  const [ list, setList ] = useState<TContactList>([])
+  const [ list, setList ] = useState<TContactList>(contactList)
+  const [ restList, setRestList ] = useState<Array<string>>([])
+  // const [ moreContactFlag, setMoreContactFlag ] = useState<number|null>(null)
 
-  useEffect(()=>{
-      setList(contactList)
-    },
-  )
 
+  const fnIsActive = (valKeys:string, valActive:boolean) => {
+    const newValActive= !valActive
+    setList((prev) => ({ ...prev, [valKeys]:newValActive}));
+  }
+  
+  let moreContactFlag: boolean = false
+    
+    const fnListRest = ()=>{
+      let newRestList: Array<string> = []
+      Object.entries(list)
+        .filter(([, isActive]) => isActive===true)
+        .slice(4)
+        .forEach(([key])=>{
+          newRestList.push(key)
+      })
+      
+      setRestList(newRestList)
+      
+      if(newRestList.length>4){
+        moreContactFlag=true
+      } else { moreContactFlag=false }
+    }
 
   return (
     <>
@@ -20,22 +41,36 @@ function App() {
       </header>
       <section>
         <h2>Lista de Contactos a Seleccioinar</h2>
-        <ul className="m-4">
+        <ul className="m-4 h-80 box-content overflow-auto">
 
-          {list.map(item => {
+          {Object.entries(list).map(([key, keyValue]) => {
             return(
-              <li className="flex gap-2 items-center m-3">
+              <li 
+              key={key}
+              className="flex gap-2 items-center m-3"
+              onClick={()=> {
+                fnIsActive(key, keyValue)
+                fnListRest()
+                
+              }}
+              >
                 <img
                  className="border-cyan-800 rounded-full"
-                 src={`https://picsum.photos/id/1${item.id}/100/100`} 
+                src={`https://picsum.photos/50/50?random`} 
                  alt="Avatar de contacto" />
-                <p className="">{item.nombre}</p>
+                <p className="">{key}</p>
               </li>
 
             )
           })}
         </ul>
       </section>
+      <ListaAvtives 
+        newList={list}
+        fnIsActive={(key, keyValue)=>fnIsActive(key, keyValue)}
+        restList={restList}
+        moreContactFlag
+        ></ListaAvtives>
     </>
   );
 }
