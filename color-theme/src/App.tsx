@@ -1,9 +1,15 @@
+import { useState } from "react";
 import "./App.css";
+import { Page } from "./components/page";
+import { ThemeContext } from "./theme/theme";
 
 function App() {
+  const [theme, setTheme] = useState("light");
   return (
     <>
-      <h1 className="text-center text-3xl">color theme</h1>
+      <ThemeContext.Provider value={{ theme, setTheme }}>
+        <Page></Page>
+      </ThemeContext.Provider>
     </>
   );
 }
