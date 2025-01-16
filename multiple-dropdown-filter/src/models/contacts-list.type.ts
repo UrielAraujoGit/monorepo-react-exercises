@@ -1,3 +1,5 @@
-export type TContactList = { 
-    [nombre: string]: boolean
-}
+export type TContactList = {
+    id: string;
+    name: string;
+    isActive: boolean;
+  };

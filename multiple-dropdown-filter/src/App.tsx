@@ -2,37 +2,23 @@ import { useState } from "react";
 import "./App.css";
 import { TContactList } from "./models/contacts-list.type";
 import { contactList } from "./utils/contact-list";
-import { ListaAvtives } from "./components/lista-actives";
 
 function App() {
 
-  const [ list, setList ] = useState<TContactList>(contactList)
-  const [ restList, setRestList ] = useState<Array<string>>([])
-  // const [ moreContactFlag, setMoreContactFlag ] = useState<number|null>(null)
-
-
-  const fnIsActive = (valKeys:string, valActive:boolean) => {
-    const newValActive= !valActive
-    setList((prev) => ({ ...prev, [valKeys]:newValActive}));
-  }
+  const [people, setPeople] = useState<TContactList[]>(contactList)
   
-  let moreContactFlag: boolean = false
-    
-    const fnListRest = ()=>{
-      let newRestList: Array<string> = []
-      Object.entries(list)
-        .filter(([, isActive]) => isActive===true)
-        .slice(4)
-        .forEach(([key])=>{
-          newRestList.push(key)
-      })
-      
-      setRestList(newRestList)
-      
-      if(newRestList.length>4){
-        moreContactFlag=true
-      } else { moreContactFlag=false }
-    }
+
+  const fnIsActive = (id: string) => {
+    setPeople((prevPeople) =>
+      prevPeople.map((person) =>
+        person.id === id ? { ...person, isActive: !person.isActive } : person
+      )
+    );
+  };
+  
+  const activePeople = people.filter((person) => person.isActive);
+  const visiblePeople = activePeople.slice(0, 5);
+  const hiddenPeople = activePeople.slice(5);
 
   return (
     <>
@@ -41,36 +27,42 @@ function App() {
       </header>
       <section>
         <h2>Lista de Contactos a Seleccioinar</h2>
-        <ul className="m-4 h-80 box-content overflow-auto">
-
-          {Object.entries(list).map(([key, keyValue]) => {
-            return(
-              <li 
-              key={key}
+        <ul className="m-4 h-96 box-content overflow-auto">
+        
+          {people.map((person) => (
+            <li 
+              key={person.id}
+              onClick={() => fnIsActive(person.id)}
               className="flex gap-2 items-center m-3"
-              onClick={()=> {
-                fnIsActive(key, keyValue)
-                fnListRest()
-                
-              }}
               >
-                <img
-                 className="border-cyan-800 rounded-full"
-                src={`https://picsum.photos/50/50?random`} 
-                 alt="Avatar de contacto" />
-                <p className="">{key}</p>
-              </li>
+              <img 
+                src={`https://picsum.photos/id/1${person.id}/100/100`} 
+                className="border-cyan-800 rounded-full"
+                alt="Avatar" />
+              <span>{person.name} - {person.isActive ? "Activo" : "Inactivo"}</span>
+            </li>
+          ))}
 
-            )
-          })}
+    
+          
         </ul>
       </section>
-      <ListaAvtives 
-        newList={list}
-        fnIsActive={(key, keyValue)=>fnIsActive(key, keyValue)}
-        restList={restList}
-        moreContactFlag
-        ></ListaAvtives>
+      <div>
+      {visiblePeople.map((person) => (
+        <div key={person.id}>{person.name}</div>
+      ))}
+
+      {hiddenPeople.length > 0 && (
+        <div>
+          +{hiddenPeople.length}
+          <div className="hiddenHover">
+            {hiddenPeople.map((person) => (
+              <div key={person.id}>{person.name}</div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
     </>
   );
 }
