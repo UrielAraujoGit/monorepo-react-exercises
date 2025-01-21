@@ -1,10 +1,21 @@
+import { useState } from "react";
 import "./App.css";
 
 function App() {
+  const [listaDeNumeros, setListaDeNumeros] = useState<Array<number>>([]);
   return (
     <>
-      <h1 className="text-center text-3xl">click machine</h1>
-    </>
+      <button
+        onClick={() => {
+          setListaDeNumeros([...listaDeNumeros, listaDeNumeros.length + 1])
+          
+        }}
+        className="text-center text-2xl rounded-xl bg-slate-500"
+      >
+        Click Me!
+      </button>
+    {listaDeNumeros.map((elem)=>{return <p key={elem}>{elem}</p> 
+    })}   </>
   );
 }
 
