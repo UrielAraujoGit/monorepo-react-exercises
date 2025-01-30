@@ -16,15 +16,18 @@ function App() {
       <form
         onSubmit={(event) => {
           event.preventDefault();
+          
           setListaDeCandidatos([
             ...listaDeCandidatos,
             { nombre: candidato, voto: 1 },
+            
           ]);
         }}
       >
         <input
           onChange={(event) => {
             setCandidato(event.target.value);
+            
           }}
           type="text"
           placeholder="CANDIDATO CORRUPTO"
@@ -37,7 +40,9 @@ function App() {
           <div key={candidatoElegido.nombre}>
             <button
               onClick={() => {
+               
                 candidatoElegido.voto = candidatoElegido.voto + 1;
+                setListaDeCandidatos([...listaDeCandidatos]) 
               }}
             >
               {candidatoElegido.nombre}
