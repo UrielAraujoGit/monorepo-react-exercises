@@ -1,5 +1,6 @@
 import { getBoards, getStates, getSubtasks, getTasks } from "./api/api.service";
 import "./App.css";
+import { BoardContainer } from "./components/board/board-container";
 
 function App() {
   const boards = getBoards();
@@ -17,6 +18,11 @@ function App() {
   return (
     <>
       <h1 className="text-center text-3xl">Task Management</h1>
+      <div className="flex flex-wrap">
+        <div className="w-1/5">
+          <BoardContainer></BoardContainer>
+        </div>
+      </div>
     </>
   );
 }
