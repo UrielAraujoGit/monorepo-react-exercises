@@ -6,3 +6,5 @@ export type TSate = {
   name: string;
   tasks: TCollection<TTask>;
 };
+
+export type TStateMin = Omit<TSate, "tasks"> & { tasks: number };

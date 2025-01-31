@@ -6,3 +6,7 @@ export type TTask = {
   name: string;
   subtasks: TCollection<TSubTask>;
 };
+
+export type TTaskMin = Omit<TTask, "subtasks"> & { subtasks: number };
+
+
