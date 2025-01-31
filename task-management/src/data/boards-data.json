@@ -1,0 +1,184 @@
+{
+  "1": {
+    "id": 1,
+    "name": "Project Management",
+    "states": {
+      "1": {
+        "id": 1,
+        "name": "To Do",
+        "tasks": {
+          "1": {
+            "id": 1,
+            "name": "Design homepage",
+            "subtasks": {
+              "1": {
+                "id": 1,
+                "name": "Create wireframe",
+                "completed": false
+              },
+              "2": { "id": 2, "name": "Review with team", "completed": false }
+            }
+          },
+          "2": {
+            "id": 2,
+            "name": "Setup database",
+            "subtasks": {
+              "3": { "id": 3, "name": "Define schema", "completed": false },
+              "4": {
+                "id": 4,
+                "name": "Implement migrations",
+                "completed": false
+              }
+            }
+          }
+        }
+      },
+      "2": {
+        "id": 2,
+        "name": "In Progress",
+        "tasks": {
+          "3": {
+            "id": 3,
+            "name": "Develop API",
+            "subtasks": {
+              "5": { "id": 5, "name": "Create endpoints", "completed": true },
+              "6": { "id": 6, "name": "Write unit tests", "completed": false }
+            }
+          }
+        }
+      },
+      "3": {
+        "id": 3,
+        "name": "Done",
+        "tasks": {
+          "4": {
+            "id": 4,
+            "name": "Create project repository",
+            "subtasks": {
+              "7": { "id": 7, "name": "Initialize repo", "completed": true },
+              "8": { "id": 8, "name": "Setup CI/CD", "completed": true }
+            }
+          }
+        }
+      }
+    }
+  },
+  "2": {
+    "id": 2,
+    "name": "Marketing Campaign",
+    "states": {
+      "1": {
+        "id": 1,
+        "name": "Planning",
+        "tasks": {
+          "1": {
+            "id": 1,
+            "name": "Define target audience",
+            "subtasks": {
+              "1": {
+                "id": 1,
+                "name": "Research demographics",
+                "completed": false
+              },
+              "2": {
+                "id": 2,
+                "name": "Analyze competitors",
+                "completed": false
+              }
+            }
+          }
+        }
+      },
+      "2": {
+        "id": 2,
+        "name": "Execution",
+        "tasks": {
+          "2": {
+            "id": 2,
+            "name": "Launch ad campaign",
+            "subtasks": {
+              "3": {
+                "id": 3,
+                "name": "Set up social media ads",
+                "completed": true
+              },
+              "4": {
+                "id": 4,
+                "name": "Monitor engagement",
+                "completed": false
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "3": {
+    "id": 3,
+    "name": "Restaurant Operations",
+    "states": {
+      "1": {
+        "id": 1,
+        "name": "Menu Planning",
+        "tasks": {
+          "1": {
+            "id": 1,
+            "name": "Create new dish",
+            "subtasks": {
+              "1": { "id": 1, "name": "Test recipes", "completed": false },
+              "2": { "id": 2, "name": "Cost analysis", "completed": false }
+            }
+          }
+        }
+      }
+    }
+  },
+  "4": {
+    "id": 4,
+    "name": "Construction Project",
+    "states": {
+      "1": {
+        "id": 1,
+        "name": "Foundation",
+        "tasks": {
+          "1": {
+            "id": 1,
+            "name": "Lay concrete",
+            "subtasks": {
+              "1": { "id": 1, "name": "Excavate site", "completed": false },
+              "2": { "id": 2, "name": "Pour concrete", "completed": false }
+            }
+          }
+        }
+      }
+    }
+  },
+  "5": {
+    "id": 5,
+    "name": "Game Development",
+    "states": {
+      "1": {
+        "id": 1,
+        "name": "Pre-Production",
+        "tasks": {
+          "1": {
+            "id": 1,
+            "name": "Concept Art",
+            "subtasks": {
+              "1": {
+                "id": 1,
+                "name": "Character sketches",
+                "completed": false
+              },
+              "2": {
+                "id": 2,
+                "name": "Environment design",
+                "completed": false
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
