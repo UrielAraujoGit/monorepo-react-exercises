@@ -1,0 +1,15 @@
+import { TBoard, TSubTask } from "../../utils/boards.type";
+
+export type TBoardsContext = {
+  boards: Array<TBoard>,
+  setBoards: React.Dispatch<React.SetStateAction<TBoard[]>>,
+  boardSelected: number,
+  setBoardSelected: React.Dispatch<React.SetStateAction<number>>,
+  idToDo: number,
+  setIdToDo: React.Dispatch<React.SetStateAction<number>>,
+  fnNewId: () => void,
+  fnNewBoards: (nameNewBoard: string) => void,
+  fnNewState: (nameNewState: string, addBgColor: string) => void,
+  fnNewTasks: (nameNewTask: string, addSubTasks: Array<TSubTask>) => void,
+
+}

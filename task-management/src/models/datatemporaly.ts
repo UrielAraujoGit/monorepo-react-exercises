@@ -1,4 +1,5 @@
-import { TBoard } from "../types/board.type";
+import { TBoard } from "../utils/boards.type";
+
 
 export const dataTemporaly: Array<TBoard> = [
     {

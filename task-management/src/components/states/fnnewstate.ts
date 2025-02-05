@@ -1,36 +1,55 @@
-import { TBoard, TState } from "../../types/board.type";
+import { TBoard, TState } from "../../utils/boards.type";
 
 export const fnNewState = (
   nameNewState: string,
-  states: Array<TState>,
+  addBgColor: string,
+  boards: TBoard[],
   fnNewId: () => void,
   idToDo: number,
   setBoards: (value: React.SetStateAction<TBoard[]>) => void,
-  boardSelectedId: number | null
+  boardSelectedId: number,
 ): void => {
+
   if (nameNewState === undefined || nameNewState.trim() === "") {
     alert("El nombre de la columna no puede estar vacío.");
     return;
   }
-  const existName = states.some((item) => item.name === nameNewState);
+  
+  let existName: boolean = false
+  
+  boards.find(board => {
+    if (board.id === boardSelectedId) {
+        board.states.find(state => {
+          if (state.name === nameNewState){
+            existName = true  
+          } else {
+            existName = false
+          }
+      })
+    }
+  })
+    
   if (existName) {
     alert("El nombre de la nueva columna ya existe.");
     return;
-  }
-  
-  fnNewId();
-  const newDataState: TState = {
-    id: idToDo,
-    name: nameNewState,
-    color: "red",
-    tasks: [],
-  };
+  } else {
 
-  setBoards((prevBoards) => {
-    return prevBoards.map((board) =>
-      board.id === boardSelectedId
-        ? { ...board, states: [...board.states, newDataState] }
-        : board
-    );
-  });
+    const newDataState: TState = {
+      id: idToDo,
+      name: nameNewState,
+      color: addBgColor,
+      tasks: [],
+    };
+    
+    setBoards((prevBoards) => {
+      return prevBoards.map((board) =>
+        board.id === boardSelectedId
+          ? { ...board, states: [...board.states, newDataState] }
+          : board
+      );
+    });
+    fnNewId();
+  }
+
+  
 };

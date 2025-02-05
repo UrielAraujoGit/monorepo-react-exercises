@@ -1,14 +1,32 @@
-import "./App.css";
-import { Boards } from "./components/board/boards";
+import { useState } from 'react'
+import './App.css'
+import { Boards } from './components/boards/boards'
+import BoardsProvider from './components/board-context/boards-context.provider'
+
 
 
 function App() {
+  
+  const [btnOnOffNewBoard, setBtnOnOffNewBoard] = useState(false)
+    
+  const fnBtnOnOffNewBoard = () => {
+    setBtnOnOffNewBoard(!btnOnOffNewBoard)
+  }
+
+  
   return (
     <>
-      <h1 className="text-center text-3xl">Task Management</h1>
-      <Boards></Boards>
+      <header>
+        <h1>TASK MANAGEMENT</h1>
+      </header>
+      <BoardsProvider>
+        <Boards
+        fnBtnOnOffNewBoard={fnBtnOnOffNewBoard}
+        btnOnOffNewBoard={btnOnOffNewBoard}
+        ></Boards>
+      </BoardsProvider>
     </>
-  );
+  )
 }
 
-export default App;
+export default App

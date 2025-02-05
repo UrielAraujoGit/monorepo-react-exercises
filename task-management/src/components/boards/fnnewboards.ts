@@ -1,4 +1,4 @@
-import { TBoard } from "../../types/board.type";
+import { TBoard } from "../../utils/boards.type";
 
 export const fnNewBoards = (
     nameNewBoard: string,
@@ -16,18 +16,22 @@ export const fnNewBoards = (
     alert("El nombre del tablero no puede estar vacío.");
     return;
   } else {
-    fnNewId();
-    const newDataBoar: TBoard = {
-      id: idToDo,
-      name: nameNewBoard,
-      states: [],
-    };
+    
     const existName = boards.some((item) => item.name === nameNewBoard);
-    if (!existName) {
-      setBoards((prevItems) => [...prevItems, newDataBoar]);
-    } else {
+    
+    if (existName) {
       alert("El nombre del nuevo tablero ya existe.");
-      return;
+      return;  
+    
+    } else {
+      const newDataBoar: TBoard = {
+        id: idToDo,
+        name: nameNewBoard,
+        states: [],
+      };
+
+      setBoards((prevItems) => [...prevItems, newDataBoar]);
     }
   }
+  fnNewId();
 };

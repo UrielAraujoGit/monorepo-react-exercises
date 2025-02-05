@@ -1,13 +1,13 @@
-import { useState } from "react";
-import { TSubTask } from "../../types/board.type";
+import { useContext, useState } from "react"
+import { TSubTask } from "../../utils/boards.type"
+import { BoardsContext } from "../board-context/boards.context"
 
-export const TaskModal = (props: {
-    fnOnOffBtnTaskModal: () => void,
-    fnNewId: () => void,
-    idToDo: number,
-    fnNewTasks: (addNameTask: string, addSubTasks: Array<TSubTask>) => void
+export const NewTaskModal =  (props: {
+    fnOnOffBtnNewTask: () => void,
 
 }) => {
+
+    const {fnNewId, idToDo, fnNewTasks} = useContext(BoardsContext)
 
     const [addNameTask, setAddNameTask] = useState<string>('')
     const [addSubTasks, setAddSubTasks] = useState<Array<TSubTask>>([])
@@ -24,9 +24,9 @@ export const TaskModal = (props: {
             alert("la sub tarea ya existe")
             return
         }
-        props.fnNewId()
+        fnNewId()
         const subs: TSubTask = {
-            id: props.idToDo,
+            id: idToDo,
             name: addNames,
             completed: false
         }
@@ -73,13 +73,13 @@ export const TaskModal = (props: {
                     <button
                         className="border border-green-800"
                         onClick={() => {
-                            props.fnNewTasks(addNameTask, addSubTasks)
-                            props.fnOnOffBtnTaskModal()
+                            fnNewTasks(addNameTask, addSubTasks)
+                            props.fnOnOffBtnNewTask()
                         }}
                     >ADD Task</button>
                     <button
                         className="border border-green-800"
-                        onClick={() => { props.fnOnOffBtnTaskModal() }}
+                        onClick={() => { props.fnOnOffBtnNewTask() }}
                     >Cancel</button>
                 </div>
             </div>

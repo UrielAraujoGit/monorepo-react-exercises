@@ -1,19 +1,24 @@
-import { TBoard, TSubTask, TTask } from "../../types/board.type";
+import { TBoard, TSubTask, TTask } from "../../utils/boards.type";
+
 
 export const fnNewTasks = (
     nameNewTask: string,
     addSubTasks: Array<TSubTask>,
-    boardSelect: TBoard,
+    boards: Array<TBoard>,
     fnNewId:()=>void,
     idToDo: number,
     setBoards: (value: React.SetStateAction<TBoard[]>) => void,
-    boardSelectedId:number|null
-) => {
+    boardSelected:number
+): void => {
     
 
-    if (nameNewTask.trim() === "") return;
+    if (nameNewTask.trim() === "" || nameNewTask === undefined ) return;
 
-    const existName = boardSelect?.states?.[0]?.tasks?.some(
+const boardSelect = boards.map(board => {
+    if(board.id === boardSelected) return board.states
+})
+
+    const existName = boardSelect?.[0]?.some(
         (item) => item.name === nameNewTask
     );
     if (existName) {
@@ -30,7 +35,7 @@ export const fnNewTasks = (
 
     setBoards((prevBoards) => {
         return prevBoards.map((board) =>
-            board.id === boardSelectedId
+            board.id === boardSelected
                 ? {
                     ...board,
                     states: board.states.map((state, index) =>
