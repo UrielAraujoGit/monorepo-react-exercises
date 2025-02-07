@@ -11,7 +11,9 @@ export const BoardContainer = () => {
   return (
     <>
       <div>
-        <h6 className="uppercase">all boards ({Object.keys(boards).length})</h6>
+        <h6 className="uppercase text-task-mono-400 my-6 ml-5 text-sm font-semibold">
+          all boards ( {Object.keys(boards).length} )
+        </h6>
         {Object.keys(boards).map((id_board) => (
           <BoardCard
             key={id_board}

@@ -8,11 +8,12 @@ export const BoardCard = (props: {
   <>
     <button onClick={props.fnHandleClick}>
       <h5
-        className={`font-semibold py-2 px-4 rounded-lg ${
-          props.active ? "text-white bg-indigo-600" : "text-gray-600"
+        className={`flex md:gap-4 flex-wrap font-semibold py-3 px-6 pr-12 rounded-2xl rounded-l-none ${
+          props.active ? "text-white bg-task-purple-dark" : "text-task-mono-400"
         }`}
       >
-        {props.board.name}
+        <img src="icon-board.svg" alt="icon board" className="object-contain" />
+        <p>{props.board.name}</p>
       </h5>
     </button>
   </>
