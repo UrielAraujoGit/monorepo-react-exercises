@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { getBoards } from "../../api/api.service";
-import { BoardCard } from "./board-card";
 import { BoardContext } from "../../context/board.context";
+import BoardCard from "./board-card";
 
 export const BoardContainer = () => {
   const boards = getBoards();
@@ -17,11 +17,19 @@ export const BoardContainer = () => {
         {Object.keys(boards).map((id_board) => (
           <BoardCard
             key={id_board}
-            board={boards[id_board]}
             active={Number(id_board) === boardContext.id_board}
-            fnHandleClick={() => boardContext.setIdBoard(Number(id_board))}
-          ></BoardCard>
+            onClick={() => boardContext.setIdBoard(Number(id_board))}
+          >
+            <p>{boards[id_board].name}</p>
+          </BoardCard>
         ))}
+
+        <BoardCard
+          className="text-task-purple-dark"
+          onClick={() => console.log("Awa")}
+        >
+          <p className="capitalize text-task-purple-dark">+ create new board</p>
+        </BoardCard>
       </div>
     </>
   );
