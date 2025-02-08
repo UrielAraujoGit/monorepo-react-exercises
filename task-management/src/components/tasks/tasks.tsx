@@ -1,41 +1,30 @@
-import { useContext, useEffect, useState } from "react"
-import { BoardsContext } from "../board-context/boards.context"
-import { TTask } from "../../utils/boards.type"
-import { SubTasksComponent } from "../subtasks/subtasks"
+import { useContext } from "react";
+import { BoardsContext } from "../board-context/boards.context";
+import { SubTasksComponent } from "../subtasks/subtasks";
 
-export const TaskComponent = (
-    props: {
-        tasksForState: TTask[]
-    }
-) => {
+export const TaskComponent = (props: { stateId: number }) => {
+  const { boardSelected, boards } = useContext(BoardsContext);
 
-    const { boardSelected } = useContext(BoardsContext)
-    
-    const [ tasksShow, setTasksShow ] = useState<TTask[]|null>()
-    
-    useEffect(()=>{
-        setTasksShow(props.tasksForState)
-        
-    }, [boardSelected])
+  //   const [tasksShow, setTasksShow] = useState<TTask[] | null>();
 
-    return (
-        <>
-        <ul>
-        {tasksShow?.map(item =>
-            <li
-            className="w-96"
-            key={item.id}>
-                <h4
-                className="ml-4"
-                >{item.name}</h4>
-                <SubTasksComponent
-                subtasks={item.subtasks}
-                >
+  //   useEffect(() => {
+  //     setTasksShow(props.tasksForState);
+  //   }, [boardSelected]);
+  const board = boards.find((b) => b.id === boardSelected);
+  const state = board?.states.find((s) => s.id === props.stateId);
+  const tasksShow = state?.tasks;
+  console.log("boards", boards);
 
-                </SubTasksComponent>
-            </li>
-        )}
-        </ul>
-        </>
-    )
-}
+  return (
+    <>
+      <ul>
+        {tasksShow?.map((item) => (
+          <li className="w-96" key={item.id}>
+            <h4 className="ml-4">{item.name}</h4>
+            <SubTasksComponent subtasks={item.subtasks}></SubTasksComponent>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+};
