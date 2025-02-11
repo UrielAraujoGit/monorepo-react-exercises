@@ -8,23 +8,11 @@ import { NewTaskModal } from "../tasks/modal.newtasks";
 
 export const StateComponent = () => {
   const { boards, boardSelected } = useContext<TBoardsContext>(BoardsContext);
-  // const [boardShow, setBoardShow] = useState<TBoard>();
 
   const boardShow = boards.find((b) => b.id === boardSelected);
 
   const [onOffBtnNewState, setOnOffBtnNewState] = useState(false);
-
   const [onOffBtnNewTask, setOnOffBtnNewTask] = useState(false);
-
-  // useEffect(() => {
-  //   boards.map((item) => {
-  //     if (item.id === boardSelected) {
-  //       setBoardShow(item);
-  //       console.log(" desde useEffect");
-  //     }
-  //     return;
-  //   });
-  // }, [boardSelected, onOffBtnNewState]);
 
   const fnOnOffBtnNewState = () => {
     setOnOffBtnNewState(!onOffBtnNewState);

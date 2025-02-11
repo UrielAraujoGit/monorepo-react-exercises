@@ -5,24 +5,34 @@ export const fnNewTasks = (
     nameNewTask: string,
     addSubTasks: Array<TSubTask>,
     boards: Array<TBoard>,
-    fnNewId:()=>void,
+    fnNewId: () => void,
     idToDo: number,
     setBoards: (value: React.SetStateAction<TBoard[]>) => void,
-    boardSelected:number
+    boardSelected: number
 ): void => {
-    
 
-    if (nameNewTask.trim() === "" || nameNewTask === undefined ) return;
 
-const boardSelect = boards.map(board => {
-    if(board.id === boardSelected) return board.states
-})
+    if (nameNewTask.trim() === "" || nameNewTask === undefined) return;
 
-    const existName = boardSelect?.[0]?.some(
-        (item) => item.name === nameNewTask
-    );
+    let existName: boolean = false
+
+    boards.find(board => {
+        if (board.id === boardSelected) {
+            board.states.find(state => {
+                state.tasks.find(task => {
+                    if (task.name === nameNewTask) {
+                        existName = true
+                    } else {
+                        existName = false
+                    }
+                })
+            })
+        }
+    })
+
+
     if (existName) {
-        alert("El nombre del nuevo tablero ya existe.");
+        alert("El nombre de la nueva tarea ya existe.");
         return;
     }
 
