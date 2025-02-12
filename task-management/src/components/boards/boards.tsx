@@ -13,7 +13,7 @@ export const Boards = (props: {
 
   return (
     <>
-      <section className="grid grid-cols-5 ">
+      <section className="grid grid-cols-5 h-screen">
         <div className="col-start-1 bg-gray-700">
           <h1 className="h-16 p-3 content-center ">TASK MANAGEMENT</h1>
           <h3 className="col-start-1  my-2 mx-4">ALL BOARDS {`(`}{boards.length}{`)`}</h3>
@@ -31,16 +31,16 @@ export const Boards = (props: {
           );
         })}
         
+          <button
+            className="text-lg font-semibold bg-indigo-500 px-3 py-2 rounded-r-full my-2"
+            onClick={() => { props.fnBtnOnOffNewBoard() }}>
+            +Create New Board
+          </button>
           {props.btnOnOffNewBoard ?
             (<NewBoardModal></NewBoardModal>)
             : null}
-          <button
-            className="text-2xl bg-indigo-500 px-4 py-2 rounded-r-full my-2"
-            onClick={() => { props.fnBtnOnOffNewBoard() }}>
-            + New Board
-          </button>
         </div>
-        <div className="col-start-2 col-end-6">
+        <div className="col-start-2 col-end-6 h-screen">
       <StateComponent>
       </StateComponent>
       </div>

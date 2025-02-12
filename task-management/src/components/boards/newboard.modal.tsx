@@ -21,14 +21,20 @@ export const NewBoardModal = () => {
                 e.preventDefault();
                 handleAddBoard()
             }
-            }>
-                <label>
-                    <input type="text"
+            }
+            className="m-3 text-center"
+            >
+                <label >
+                    <input 
+                        type="text"
                         value={newNameBoard}
                         onChange={(e) => { setNewNameBoard(e.currentTarget.value) }}
+                        className="border-2 border-indigo-400 h-8 rounded-md"
                     />
                 </label>
-                <button>ADD</button>
+                <button
+                    className="border-2 border-indigo-400 h-8 rounded-md m-2"
+                >ADD</button>
             </form>
         </>
     )
