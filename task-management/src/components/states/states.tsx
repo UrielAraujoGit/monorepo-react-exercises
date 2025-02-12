@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { BoardsContext } from "../board-context/boards.context";
-import { TBoard } from "../../utils/boards.type";
 import { TaskComponent } from "../tasks/tasks";
 import { NewStateModal } from "./modal.state";
 import { TBoardsContext } from "../board-context/boards-contex.type";
@@ -21,25 +20,30 @@ export const StateComponent = () => {
     setOnOffBtnNewTask(!onOffBtnNewTask);
   };
 
+  const cantCol = boardShow?.states.length? boardShow?.states.length + 1 : 4;
+
   return (
     <>
-      <section className="grid grid-cols-5 w-full">
-        <h2 className="col-start-1 col-end-3 text-center text-2xl text-stone-700">
+      
+      <div className="grid grid-cols-5 h-16 bg-gray-700">
+        <h2 className="col-span-4 text-2xl content-center m-4">
           {boardShow?.name}
         </h2>
-        <div className="col-start-5 col-end-6 text-end">
+        <div className="col-start-5 col-end-6 content-center">
           <button
-            className="bg-blue-700 px-4 py-2 rounded-l-4xl"
+            className="bg-indigo-500 px-4 py-2 rounded-3xl"
             onClick={() => fnOnOffBtnNewTask()}
           >
-            +Task
+            +Add New Task
           </button>
         </div>
-      </section>
-      <section className="flex">
+      </div>
+      <div className="flex" 
+       style={{ display: 'grid', gridTemplateColumns: `repeat(${cantCol}, 1fr)` }}
+      >
         {boardShow?.states.map((item) => (
           <div key={item.id} style={{ background: item.color }}>
-            <h3 className="text-center">{item.name}</h3>
+            <h3 className="m-4">{item.name} {`(`}{item.tasks.length}{`)`}</h3>
             <TaskComponent stateId={item.id}></TaskComponent>
           </div>
         ))}
@@ -51,13 +55,14 @@ export const StateComponent = () => {
           {" "}
           + STATE{" "}
         </button>
-      </section>
+      </div>
       {onOffBtnNewState ? (
         <NewStateModal fnOnOffBtnNewState={fnOnOffBtnNewState}></NewStateModal>
       ) : null}
       {onOffBtnNewTask ? (
         <NewTaskModal fnOnOffBtnNewTask={fnOnOffBtnNewTask}></NewTaskModal>
       ) : null}
+
     </>
   );
 };

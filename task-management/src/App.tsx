@@ -6,25 +6,24 @@ import BoardsProvider from './components/board-context/boards-context.provider'
 
 
 function App() {
-  
+
   const [btnOnOffNewBoard, setBtnOnOffNewBoard] = useState(false)
-    
+
   const fnBtnOnOffNewBoard = () => {
     setBtnOnOffNewBoard(!btnOnOffNewBoard)
   }
 
-  
+
   return (
     <>
-      <header>
-        <h1>TASK MANAGEMENT</h1>
-      </header>
-      <BoardsProvider>
-        <Boards
-        fnBtnOnOffNewBoard={fnBtnOnOffNewBoard}
-        btnOnOffNewBoard={btnOnOffNewBoard}
-        ></Boards>
-      </BoardsProvider>
+           
+        <BoardsProvider>
+          <Boards
+            fnBtnOnOffNewBoard={fnBtnOnOffNewBoard}
+            btnOnOffNewBoard={btnOnOffNewBoard}
+          ></Boards>
+        </BoardsProvider>
+      
     </>
   )
 }

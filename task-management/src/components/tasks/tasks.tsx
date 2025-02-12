@@ -19,8 +19,8 @@ export const TaskComponent = (props: { stateId: number }) => {
     <>
       <ul>
         {tasksShow?.map((item) => (
-          <li className="w-96" key={item.id}>
-            <h4 className="ml-4">{item.name}</h4>
+          <li className="m-2 p-3 bg-slate-800 rounded-md" key={item.id}>
+            <h4 className="mt-3 m-1">{item.name}</h4>
             <SubTasksComponent subtasks={item.subtasks}></SubTasksComponent>
           </li>
         ))}

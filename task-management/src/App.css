@@ -2,4 +2,12 @@
 
 body {
     font-family: Plus Jakarta Sans;
+    background-color: #20212c;
+    color: #828fa3;
 }
+
+h1, h2, h3, h4 {
+    color: #e1e1e1;
+}
+
+
