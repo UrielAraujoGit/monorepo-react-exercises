@@ -1,8 +1,9 @@
 import { FunctionComponent } from "react";
+import { TComponentProps } from "../../models/component-props.type";
 
 type BoardCardProps = {
   active?: boolean;
-} & React.PropsWithChildren<React.ComponentPropsWithoutRef<"button">>;
+} & TComponentProps<"button">;
 
 const BoardCard: FunctionComponent<BoardCardProps> = (
   props: BoardCardProps
@@ -13,7 +14,7 @@ const BoardCard: FunctionComponent<BoardCardProps> = (
     <>
       <button {...btnProps}>
         <h5
-          className={`flex md:gap-4 flex-wrap font-semibold py-3 px-6 pr-12 rounded-2xl rounded-l-none ${
+          className={`flex md:gap-4 flex-wrap font-semibold py-3 px-6 pr-10 rounded-r-full ${
             props.active
               ? "text-white bg-task-purple-dark"
               : "text-task-mono-400 hover:bg-task-mono-100 hover:text-task-purple-dark"

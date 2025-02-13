@@ -3,6 +3,9 @@ import { useState } from "react";
 import "./App.css";
 import { BoardContainer } from "./components/board/board-container";
 import { BoardContext } from "./context/board.context";
+import NavBarTitle from "./components/navbar/navbar-title";
+import StateContainer from "./components/state/state-container";
+import { NavbarMenu } from "./components/navbar/navbar-menu";
 
 function App() {
   // const boards = getBoards();
@@ -21,19 +24,23 @@ function App() {
 
   return (
     <>
-      <h1 className="text-center text-3xl">Task Management</h1>
-      <BoardContext.Provider
-        value={{
-          id_board: idBoardSelected,
-          setIdBoard: setIdBoardSelected,
-        }}
-      >
-        <div className="flex flex-wrap">
+      <div className="h-screen flex flex-row ">
+        <BoardContext.Provider
+          value={{
+            id_board: idBoardSelected,
+            setIdBoard: setIdBoardSelected,
+          }}
+        >
           <div className="w-1/5">
+            <NavBarTitle></NavBarTitle>
             <BoardContainer></BoardContainer>
           </div>
-        </div>
-      </BoardContext.Provider>
+          <div className="flex-grow ">
+            <NavbarMenu></NavbarMenu>
+            <StateContainer></StateContainer>
+          </div>
+        </BoardContext.Provider>
+      </div>
     </>
   );
 }

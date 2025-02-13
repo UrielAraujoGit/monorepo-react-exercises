@@ -1,9 +1,11 @@
 import { useContext, useState } from "react";
 import { getBoards, postBoard } from "../../api/api.service";
 import { BoardContext } from "../../context/board.context";
+import { TComponentProps } from "../../models/component-props.type";
 import BoardCard from "./board-card";
+import { truncate } from "../../utils/truncate";
 
-export const BoardContainer = () => {
+export const BoardContainer = (props: TComponentProps<"div">) => {
   const [boards, setBoards] = useState(getBoards());
 
   const boardContext = useContext(BoardContext);
@@ -16,8 +18,8 @@ export const BoardContainer = () => {
 
   return (
     <>
-      <div>
-        <h6 className="uppercase text-task-mono-400 my-6 ml-5 text-sm font-semibold">
+      <div className="grid" {...props}>
+        <h6 className="uppercase text-task-mono-400 my-6 ml-5 mt-4 text-sm font-semibold">
           all boards ( {Object.keys(boards).length} )
         </h6>
         {Object.keys(boards).map((id_board) => (
@@ -26,7 +28,9 @@ export const BoardContainer = () => {
             active={Number(id_board) === boardContext.id_board}
             onClick={() => boardContext.setIdBoard(Number(id_board))}
           >
-            <p>{boards[id_board].name}</p>
+            <p className="truncate" title={boards[id_board].name}>
+              {truncate(boards[id_board].name, 20)}
+            </p>
           </BoardCard>
         ))}
 
