@@ -18,7 +18,7 @@ const StateContainer = (props: TComponentProps<"div">) => {
         {Object.keys(states ?? {}).map((id_state) => (
           <StateCard
             key={id_state}
-            id_state={Number(id_state)}
+            state={states![id_state]}
             className="w-56"
           ></StateCard>
         ))}
