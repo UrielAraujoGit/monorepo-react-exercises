@@ -1,13 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
 
 body {
-    font-family: Plus Jakarta Sans;
-    background-color: #20212c;
-    color: #828fa3;
+  font-family: Plus Jakarta Sans;
+  background-color: #20212c;
+  color: #828fa3;
 }
 
-h1, h2, h3, h4 {
-    color: #e1e1e1;
+h1,
+h2,
+h3,
+h4 {
+  color: #e1e1e1;
 }
 
+form {
+  background: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  transition: all 0.5s;
+}
 
+form + input {
+    background: steelblue;
+    display: table;
+    margin: auto;
+    color: #fff;
+    line-height: 3;
+    padding: 0 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }

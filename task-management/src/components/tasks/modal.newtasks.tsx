@@ -31,7 +31,7 @@ export const NewTaskModal = (props: {
     };
 
     return (
-        <div className="new-task-modal-container">
+        <>
             <form
                 className="flex flex-col new-task-form"
                 onSubmit={(e) => {
@@ -79,6 +79,6 @@ export const NewTaskModal = (props: {
                     Cancel
                 </button>
             </form>
-        </div>
+        </>
     );
 };
