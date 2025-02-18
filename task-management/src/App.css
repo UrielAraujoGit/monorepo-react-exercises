@@ -6,15 +6,8 @@ body {
   color: #828fa3;
 }
 
-h1,
-h2,
-h3,
-h4 {
-  color: #e1e1e1;
-}
-
 .form_velo {
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.5);
   color: #fff;
   position: fixed;
   top: 0;
@@ -23,7 +16,6 @@ h4 {
   width: 100vw;
   transition: all 0.5s;
 }
-
 
 form {
   background: #20212c;
@@ -46,7 +38,6 @@ form>input {
     margin: auto;
     line-height: 3;
     padding: 0 1em;
-    text-transform: uppercase;
     cursor: pointer;
     z-index: 2;
     align-self: center;
@@ -54,9 +45,20 @@ form>input {
 
 input{
   color: #20212c;
-  font-weight: bolder;
-  
+  font-weight: bolder; 
 }
-form>input[type="color"]{
 
+.board_hover{
+  width: 16rem;
+  height: 3rem;
+  text-align: left;
+  align-content: center;
+}
+
+.board_hover:hover {
+  background-color: #e1e1e1;
+  color: #635fc7;
+  border-top-right-radius: 9999px;
+  border-bottom-right-radius: 9999px;
+  transition: all ease-in-out 0.3s;
 }
