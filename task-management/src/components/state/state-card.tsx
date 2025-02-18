@@ -16,7 +16,7 @@ export const StateCard = (
 
   return (
     <div {...divProps} className={` ${divProps.className ?? ""}`}>
-      <p className="capitalize text-task-mono-400 text-sm mb-4 font-semibold">
+      <p className="capitalize text-task-mono-400 text-sm mb-4 font-semibold tracking-widest">
         {props.state.name} ( {props.state.tasks} )
       </p>
       <TaskContainer

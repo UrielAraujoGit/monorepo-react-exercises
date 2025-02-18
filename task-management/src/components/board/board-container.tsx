@@ -29,7 +29,7 @@ export const BoardContainer = (props: TComponentProps<"div">) => {
             onClick={() => boardContext.setIdBoard(Number(id_board))}
           >
             <p className="truncate" title={boards[id_board].name}>
-              {truncate(boards[id_board].name, 20)}
+              {truncate(boards[id_board].name, 15)}
             </p>
           </BoardCard>
         ))}
