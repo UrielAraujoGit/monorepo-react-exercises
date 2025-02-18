@@ -37,7 +37,10 @@ export const Boards = (props: {
             +Create New Board
           </button>
           {props.btnOnOffNewBoard ?
-            (<NewBoardModal></NewBoardModal>)
+            (
+              <NewBoardModal
+              fnBtnOnOffNewBoard={props.fnBtnOnOffNewBoard}></NewBoardModal>
+            )
             : null}
         </div>
         <div className="col-start-2 col-end-6 h-screen">

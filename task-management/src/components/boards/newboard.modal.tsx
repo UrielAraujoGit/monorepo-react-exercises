@@ -2,7 +2,9 @@ import { useContext, useState } from "react"
 import { BoardsContext } from "../board-context/boards.context"
 import { TBoardsContext } from "../board-context/boards-contex.type";
 
-export const NewBoardModal = () => {
+export const NewBoardModal = (props: {
+    fnBtnOnOffNewBoard:()=>void,
+}) => {
 
     const { fnNewBoards } = useContext<TBoardsContext>(BoardsContext)
 
@@ -17,6 +19,10 @@ export const NewBoardModal = () => {
 
     return (
         <>
+            <div
+            className="form_velo"
+            onClick={()=>props.fnBtnOnOffNewBoard()}
+            ></div>
             <form onSubmit={(e) => {
                 e.preventDefault();
                 handleAddBoard()

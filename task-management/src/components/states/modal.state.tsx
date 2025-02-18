@@ -19,6 +19,10 @@ export const NewStateModal = (
 
     return (
         <>
+        <div
+        className="form_velo"
+        onClick={()=>props.fnOnOffBtnNewState()}
+        ></div>
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
@@ -40,14 +44,14 @@ export const NewStateModal = (
                 id=""
                 value={addBgColor}
                 onChange={(e)=> setAddBgColor(e.currentTarget.value)}
-
+                className="border-2 border-indigo-400 h-8 rounded-md m-2 w-16 p-0"
                 />
                 <button
-                    className="border border-green-800"
+                    className="border-2 border-indigo-400 h-8 rounded-md m-2"
 
                 >ADD</button>
                 <button
-                    className="border border-green-800"
+                    className="border-2 border-indigo-400 h-8 rounded-md m-2"
                     type="reset"
                     onClick={() => props.fnOnOffBtnNewState()}
                 >Cancel</button>

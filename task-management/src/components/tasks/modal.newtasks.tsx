@@ -32,6 +32,10 @@ export const NewTaskModal = (props: {
 
     return (
         <>
+            <div
+            className="form_velo"
+            onClick={()=>props.fnOnOffBtnNewTask()}
+            ></div>
             <form
                 className="flex flex-col new-task-form"
                 onSubmit={(e) => {
@@ -67,15 +71,22 @@ export const NewTaskModal = (props: {
                     value={subTaskName}
                     onChange={(e) => setSubTaskName(e.target.value)}
                 />
-                <button className="border border-green-800" type="button" onClick={handleAddSubTask}>
+                <button className="border-2 border-indigo-400 h-8 rounded-md m-2"
+                    type="button" 
+                    onClick={handleAddSubTask}>
                     + Sub Task
                 </button>
 
-                <button className="border border-green-800" type="submit">
+                <button 
+                    className="border-2 border-indigo-400 h-8 rounded-md m-2"
+                    type="submit">
                     ADD Task
                 </button>
 
-                <button className="border border-green-800" type="button" onClick={props.fnOnOffBtnNewTask}>
+                <button 
+                className="border-2 border-indigo-400 h-8 rounded-md m-2" 
+                type="button" 
+                onClick={props.fnOnOffBtnNewTask}>
                     Cancel
                 </button>
             </form>
