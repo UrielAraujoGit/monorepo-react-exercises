@@ -11,7 +11,12 @@ export const TaskComponent = (props: { stateId: number }) => {
 
   const [showTaskModal, setShowTaskModal] = useState(false)
   const fnShowTaskModal = () => { setShowTaskModal(!showTaskModal) }
-  const [taskId, setTaskId] = useState(0)
+  
+  const [taskId, setTaskId] = useState<number|null>()
+  const fnSetTaskId = (id: number) => {
+    
+    setTaskId(id)
+  }
   
   return (
     <>
@@ -19,7 +24,7 @@ export const TaskComponent = (props: { stateId: number }) => {
         {tasksShow?.map((item) => (
           <li
             onClick={() => {
-              setTaskId(item.id)
+              fnSetTaskId(item.id);
               fnShowTaskModal();
             }}
             className="m-2 p-3 bg-slate-800 rounded-md" key={item.id}>
@@ -39,8 +44,7 @@ export const TaskComponent = (props: { stateId: number }) => {
         <ModalTasks
           fnShowTaskModal={fnShowTaskModal}
           stateId={props.stateId}
-          taskId={taskId}
-
+          taskId={taskId!}
         ></ModalTasks>
         : null}
     </>

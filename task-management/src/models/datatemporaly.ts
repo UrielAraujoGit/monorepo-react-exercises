@@ -82,7 +82,24 @@ export const dataTemporaly: Array<TBoard> = [
           id: 3,
           name: "Done",
           color: "#9FBB73",
-          tasks: []
+          tasks: [
+            {
+              id: 3,
+              name: "Design settings and buy pages",
+              subtasks: [
+                {
+                  id: 7,
+                  name: "Design settings buy page",
+                  completed: true,
+                },
+                {
+                  id: 8,
+                  name: "Design buy page",
+                  completed: false,
+                },
+              ],
+            },
+          ]
         }
       ],
     },
