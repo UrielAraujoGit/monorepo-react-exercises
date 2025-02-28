@@ -14,7 +14,7 @@ const BoardCard: FunctionComponent<BoardCardProps> = (
     <>
       <button {...btnProps}>
         <h5
-          className={`flex md:gap-4 flex-wrap font-semibold py-3 px-6 pr-10 rounded-r-full ${
+          className={`flex md:gap-4 flex-wrap font-semibold py-3 px-6 pr-10 rounded-r-full max-w-full ${
             props.active
               ? "text-white bg-task-purple-dark"
               : "text-task-mono-400 hover:bg-task-mono-100 hover:text-task-purple-dark"

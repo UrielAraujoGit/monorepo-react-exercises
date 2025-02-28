@@ -1,14 +1,17 @@
 import { useContext, useState } from "react";
-import { getBoards, postBoard } from "../../api/api.service";
+import { getStates } from "../../api/api.service";
 import { BoardContext } from "../../context/board.context";
 import { TComponentProps } from "../../models/component-props.type";
 import BoardCard from "./board-card";
-import { truncate } from "../../utils/truncate";
+import { BoardFormModal } from "./board-form-modal";
 
 export const BoardContainer = (props: TComponentProps<"div">) => {
-  const [boards, setBoards] = useState(getBoards());
-
-  const boardContext = useContext(BoardContext);
+  const {
+    boards,
+    id_board: id_board_context,
+    setIdBoard,
+    setStates,
+  } = useContext(BoardContext);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -25,11 +28,15 @@ export const BoardContainer = (props: TComponentProps<"div">) => {
         {Object.keys(boards).map((id_board) => (
           <BoardCard
             key={id_board}
-            active={Number(id_board) === boardContext.id_board}
-            onClick={() => boardContext.setIdBoard(Number(id_board))}
+            active={Number(id_board) === id_board_context}
+            onClick={() => {
+              setIdBoard(Number(id_board));
+              setStates(getStates(Number(id_board)) ?? {});
+            }}
+            className="max-w-full truncate flex flex-wrap "
           >
-            <p className="truncate" title={boards[id_board].name}>
-              {truncate(boards[id_board].name, 15)}
+            <p className="truncate capitalize" title={boards[id_board].name}>
+              {boards[id_board].name}
             </p>
           </BoardCard>
         ))}
@@ -41,19 +48,11 @@ export const BoardContainer = (props: TComponentProps<"div">) => {
           <p className="capitalize text-task-purple-dark">+ create new board</p>
         </BoardCard>
 
-        {showModal ? (
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              const input = e.currentTarget[0] as HTMLInputElement;
-              const newBoard = postBoard(input.value);
-              console.log(`board ${newBoard.id} - ${newBoard.name} created!`);
-              setBoards({ ...boards, [newBoard.id]: newBoard });
-            }}
-          >
-            <input />
-          </form>
-        ) : null}
+        <BoardFormModal
+          showModal={showModal}
+          toggleShowModal={toggleShowModal}
+          isEdit={false}
+        />
       </div>
     </>
   );

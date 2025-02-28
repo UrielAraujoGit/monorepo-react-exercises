@@ -24,6 +24,19 @@ export const postBoard = (name: string) => {
   return data[id];
 };
 
+export const putBoard = (id: number, name: string) => {
+  const data = getData();
+
+  if (!data[id]) {
+    console.warn("board not found!");
+    return null;
+  }
+
+  data[id].name = name;
+  localStorage.setItem(KEY_BOARDS_LOCALSTORAGE, JSON.stringify(data));
+  return data[id];
+};
+
 export const getStates = (id_board: number) => {
   const board_data = getData()[id_board];
 

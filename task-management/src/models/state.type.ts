@@ -1,10 +1,10 @@
 import { TCollection } from "./collection.type";
 import { TTask } from "./task.type";
 
-export type TSate = {
+export type TState = {
   id: number;
   name: string;
   tasks: TCollection<TTask>;
 };
 
-export type TStateMin = Omit<TSate, "tasks"> & { tasks: number };
+export type TStateMin = Omit<TState, "tasks"> & { tasks: number };

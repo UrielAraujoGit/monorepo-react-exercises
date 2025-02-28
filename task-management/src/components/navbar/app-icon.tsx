@@ -1,4 +1,4 @@
-export const NavBarTitle = () => {
+export const AppIcon = () => {
   return (
     <>
       <div className="flex flex-wrap px-4 py-[1.375rem] capitalize text-task-mono-100 items-center gap-4 pl-6 ">
@@ -13,4 +13,4 @@ export const NavBarTitle = () => {
   );
 };
 
-export default NavBarTitle;
+export default AppIcon;

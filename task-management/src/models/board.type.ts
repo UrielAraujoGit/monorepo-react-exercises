@@ -1,10 +1,10 @@
 import { TCollection } from "./collection.type";
-import { TSate } from "./state.type";
+import { TState } from "./state.type";
 
 export type TBoard = {
   id: number;
   name: string;
-  states: TCollection<TSate>;
+  states: TCollection<TState>;
 };
 
 export type TBoardMin = Omit<TBoard, "states"> & { states: number };

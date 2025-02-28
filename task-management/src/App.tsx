@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { getBoards, getStates, getSubtasks, getTasks } from "./api/api.service";
 import "./App.css";
 import { BoardContainer } from "./components/board/board-container";
-import { BoardContext } from "./context/board.context";
-import NavBarTitle from "./components/navbar/navbar-title";
-import StateContainer from "./components/state/state-container";
 import { NavbarMenu } from "./components/navbar/navbar-menu";
+import AppIcon from "./components/navbar/app-icon";
+import StateContainer from "./components/state/state-container";
+import { BoardContext } from "./context/board.context";
+import { TCollection } from "./models/collection.type";
+import { TState, TStateMin } from "./models/state.type";
+import { getBoards } from "./api/api.service";
+import { TBoard, TBoardMin } from "./models/board.type";
 
 function App() {
   // const boards = getBoards();
@@ -22,6 +26,15 @@ function App() {
 
   const [idBoardSelected, setIdBoardSelected] = useState(0);
 
+  const [boards, setBoards] = useState<TCollection<TBoardMin>>({});
+
+  const board: TBoardMin | null = boards[idBoardSelected] ?? null;
+  const [states, setStates] = useState<TCollection<TStateMin>>({});
+
+  useEffect(() => {
+    setBoards(getBoards());
+  }, []);
+
   return (
     <>
       <div className="h-screen flex flex-row ">
@@ -29,10 +42,15 @@ function App() {
           value={{
             id_board: idBoardSelected,
             setIdBoard: setIdBoardSelected,
+            board,
+            boards,
+            setBoards,
+            states,
+            setStates,
           }}
         >
           <div className="w-1/5">
-            <NavBarTitle></NavBarTitle>
+            <AppIcon></AppIcon>
             <BoardContainer></BoardContainer>
           </div>
           <div className="flex-grow ">
