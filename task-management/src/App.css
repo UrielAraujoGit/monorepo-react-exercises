@@ -5,7 +5,7 @@ body {
   background-color: #20212c;
   color: #828fa3;
 }
-.form,
+
 .form_velo {
   background: rgba(0, 0, 0, 0.5);
   color: #fff;
@@ -16,7 +16,7 @@ body {
   width: 100vw;
   transition: all 0.5s;
 }
-
+.form,
 form {
   background: #20212c;
   color:#828fa3;
