@@ -12,5 +12,3 @@ export const AppIcon = () => {
     </>
   );
 };
-
-export default AppIcon;

@@ -4,10 +4,10 @@ import { BoardContext } from "../../context/board.context";
 import { TComponentProps } from "../../models/component-props.type";
 import { StateCard } from "./state-card";
 
-const StateContainer = (props: TComponentProps<"div">) => {
+export const StateContainer = (props: TComponentProps<"div">) => {
   const { id_board } = useContext(BoardContext);
 
-  const states = getStates(id_board);
+  const states = id_board ? getStates(id_board) : null;
 
   return (
     <div
@@ -20,11 +20,9 @@ const StateContainer = (props: TComponentProps<"div">) => {
             key={id_state}
             state={states![id_state]}
             className="w-56"
-          ></StateCard>
+          />
         ))}
       </div>
     </div>
   );
 };
-
-export default StateContainer;

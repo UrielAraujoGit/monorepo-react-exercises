@@ -4,7 +4,7 @@ import { truncate } from "../../utils/truncate.util";
 import { BoardFormModal } from "../board/board-form-modal";
 
 export const NavbarMenu = () => {
-  const { id_board, board } = useContext(BoardContext);
+  const { board } = useContext(BoardContext);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -12,7 +12,6 @@ export const NavbarMenu = () => {
     setShowModal(!showModal);
   };
 
-  // todo: add board obj to context
   return (
     <>
       <div className="flex-grow justify-between flex items-center flex-wrap p-4">

@@ -5,7 +5,7 @@ type BoardCardProps = {
   active?: boolean;
 } & TComponentProps<"button">;
 
-const BoardCard: FunctionComponent<BoardCardProps> = (
+export const BoardCard: FunctionComponent<BoardCardProps> = (
   props: BoardCardProps
 ) => {
   const btnProps = { ...props, active: undefined };
@@ -36,5 +36,3 @@ const BoardCard: FunctionComponent<BoardCardProps> = (
     </>
   );
 };
-
-export default BoardCard;

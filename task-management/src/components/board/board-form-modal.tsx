@@ -7,42 +7,43 @@ export const BoardFormModal = (props: {
   showModal: boolean;
   toggleShowModal: () => void;
   isEdit: boolean;
-  //   changeBoard: (board: TBoardMin) => void;
 }) => {
   const { states, boards, setBoards, id_board, board } =
     useContext(BoardContext);
 
-  const inputs = props.isEdit ? Object.keys(states) : ["1"];
+  // TODO: implement: Create a state list when saving a new board
+  const [inputs, setInputs] = useState(
+    props.isEdit ? Object.keys(states) : ["1"]
+  );
 
   const [boardName, setBoardName] = useState("");
-  // console.log("board modal ", boardName, board);
 
   useEffect(() => {
     setBoardName(props.isEdit ? board?.name ?? "" : "");
   }, [id_board, props.isEdit]);
 
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const input = e.currentTarget[0] as HTMLInputElement;
+    if (!input.value?.trim()) {
+      props.toggleShowModal();
+      return;
+    }
+
+    const newBoard = props.isEdit
+      ? putBoard(id_board, input.value)
+      : postBoard(input.value);
+
+    if (newBoard) {
+      console.log(`board ${newBoard.id} - ${newBoard.name} created!`);
+      props.toggleShowModal();
+      setBoards({ ...boards, [newBoard.id]: newBoard });
+    }
+  };
+
   return (
     <Modal show={props.showModal} showChange={props.toggleShowModal}>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          const input = e.currentTarget[0] as HTMLInputElement;
-          if (!input.value?.trim()) {
-            props.toggleShowModal();
-            return;
-          }
-
-          const newBoard = props.isEdit
-            ? putBoard(id_board, input.value)
-            : postBoard(input.value);
-
-          if (newBoard) {
-            console.log(`board ${newBoard.id} - ${newBoard.name} created!`);
-            props.toggleShowModal();
-            setBoards({ ...boards, [newBoard.id]: newBoard });
-          }
-        }}
-      >
+      <form onSubmit={handleFormSubmit}>
         <p className="text-2xl capitalize font-semibold text-task-mono-100 mb-5">
           add new board
         </p>
@@ -75,7 +76,11 @@ export const BoardFormModal = (props: {
           ))}
         </div>
 
-        <button className="capitalize bg-task-purple-dark px-5 py-2 rounded-lg w-full text-task-mono-100 font-semibold">
+        <button onClick={()=> setInputs([...inputs, String(inputs.length + 1 )])} className="block capitalize bg-task-mono-100 px-5 py-2 rounded-lg w-full text-task-purple-dark font-semibold">
+          + add new column
+        </button>
+
+        <button className=" capitalize bg-task-purple-dark px-5 py-2 rounded-lg w-full text-task-mono-100 font-semibold">
           {props.isEdit ? "edit board" : "create new board"}
         </button>
       </form>

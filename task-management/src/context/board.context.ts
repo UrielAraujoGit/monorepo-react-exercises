@@ -7,7 +7,6 @@ export type TBoardContext = {
   id_board: number;
   setIdBoard: (id_board: number) => void;
   board: TBoardMin | null;
-  // setBoard?
   boards: TCollection<TBoardMin>;
   setBoards: (newBoards: TCollection<TBoardMin>) => void;
   states: TCollection<TStateMin>;
