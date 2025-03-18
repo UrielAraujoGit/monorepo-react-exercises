@@ -11,5 +11,8 @@ export type TBoardsContext = {
   fnNewBoards: (nameNewBoard: string) => void,
   fnNewState: (nameNewState: string, addBgColor: string) => void,
   fnNewTasks: (nameNewTask: string, addSubTasks: Array<TSubTask>) => void,
-
+  fnCompletedSubTasks: (subTaskId: number, 
+    iscompleted: boolean,
+    stateId: number,
+    taskId: number) => void,
 }

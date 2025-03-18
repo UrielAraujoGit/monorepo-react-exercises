@@ -5,7 +5,7 @@ import { fnNewBoards as importedFnNewBoards } from "../boards/fnnewboards";
 import { fnNewState as importedFnNewState } from "../states/fnnewstate";
 import { fnNewTasks as importedFnNewTasks } from "../tasks/fnnewtasks";
 import { BoardsContext } from "./boards.context";
-
+import { fnCompletedSubTasks as importedFnComletedSubtasks } from "../tasks/fnchangesubtasks";
 
 
 type TBoardsProviderProps = {
@@ -36,6 +36,18 @@ type TBoardsProviderProps = {
         boardSelected )
     }
 
+    const fnCompletedSubTasks = (subTaskId: number, 
+      iscompleted: boolean,
+      stateId: number,
+      taskId: number,) =>{
+        importedFnComletedSubtasks(subTaskId, 
+          iscompleted,
+          stateId,
+          taskId,
+          setBoards,
+          boardSelected)
+      }
+
     return (
       <BoardsContext.Provider
         value={{
@@ -49,6 +61,7 @@ type TBoardsProviderProps = {
           fnNewBoards,
           fnNewState,
           fnNewTasks,
+          fnCompletedSubTasks,
         }}
       >
         {children}

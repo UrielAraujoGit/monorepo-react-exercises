@@ -1,17 +1,16 @@
-import { useContext } from "react";
-import { BoardsContext } from "../board-context/boards.context";
+import { TBoard } from "../../utils/boards.type";
 
-const {boards, setBoards, boardSelected } = useContext(BoardsContext)
 
 export const fnCompletedSubTasks = (
     subTaskId: number, 
     iscompleted: boolean,
     stateId: number,
     taskId: number,
-
+    setBoards:(value: React.SetStateAction<TBoard[]>) => void,
+    boardSelected: number,
 ) => {
 
-    setBoards((prevBoards) => {
+setBoards((prevBoards) => {
         return prevBoards.map((board) =>
             board.id === boardSelected
                 ? {

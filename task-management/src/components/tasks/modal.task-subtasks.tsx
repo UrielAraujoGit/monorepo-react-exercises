@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import { BoardsContext } from "../board-context/boards.context";
-import { fnCompletedSubTasks } from "./fnchangesubtasks";
 
 export const ModalTasks = (props: {
     fnShowTaskModal: () => void,
@@ -8,22 +7,13 @@ export const ModalTasks = (props: {
     taskId: number,
 
 }) => {
-    const { boardSelected, boards, setBoards } = useContext(BoardsContext);
+    const { boardSelected, boards, fnCompletedSubTasks } = useContext(BoardsContext);
 
     const board = boards.find((b) => b.id === boardSelected);
     const state = board?.states.find((s) => s.id === props.stateId);
     const taskShow = state?.tasks?.find((item) => item.id === props.taskId)
 
     const [changeState, setChangeState] = useState<null | number>()
-
-    const fnChangeSubtasks = (
-        subTaskId: number, 
-        iscompleted: boolean,
-        stateId: number,
-        taskId: number,
-    ) => {
-        fnCompletedSubTasks (subTaskId, iscompleted, stateId, taskId)
-    }
 
     return (
         <>
@@ -43,24 +33,17 @@ export const ModalTasks = (props: {
                             key={sub.id}
                             className="flex gap-2 m-1"
                         >
-                            {sub.completed
-                                ? <input type="checkbox" name="" id="" checked 
-                                onChange={() => { 
-                                    fnChangeSubtasks(
-                                        sub.id, 
-                                        sub.completed,
-                                        props.stateId, 
-                                        props.taskId
-                                    )}} />
-                                : <input type="checkbox" name="" id="" 
-                                onChange={() => { 
-                                    fnChangeSubtasks(
+                            <input
+                                type="checkbox"
+                                checked={sub.completed}
+                                onChange={() => {
+                                    fnCompletedSubTasks(
                                         sub.id,
                                         sub.completed,
-                                        props.stateId, 
+                                        props.stateId,
                                         props.taskId
-                                        )}} />
-                            }
+                                    )
+                                }} />
 
                             <h4 className="text-lg">{sub.name}</h4>
                             <p className="text-slate-400"> {sub.completed ? "completed" : "no completed"}</p>
@@ -71,7 +54,10 @@ export const ModalTasks = (props: {
                 <select
                     className="m-2"
                     name="" id=""
-                    onClickCapture={(e) => setChangeState(Number(e.currentTarget.value))}>
+                    onClickCapture={(e) => {
+                        setChangeState(Number(e.currentTarget.value)),
+                        console.log(changeState)
+                    }}>
                     {board?.states.map((stateref) => {
                         return (
                             <option key={stateref.id} value={stateref.id} >{stateref.name}</option>
