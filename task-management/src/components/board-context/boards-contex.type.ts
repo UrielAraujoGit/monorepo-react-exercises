@@ -15,4 +15,8 @@ export type TBoardsContext = {
     iscompleted: boolean,
     stateId: number,
     taskId: number) => void,
+  moveTask: (boardId:number,
+    fromStateId:number,
+    toStateId:number,
+    taskId:number) => void,
 }

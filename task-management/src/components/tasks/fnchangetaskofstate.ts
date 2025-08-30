@@ -1,36 +1,42 @@
-import { useContext, useState } from "react";
-import { BoardsContext } from "../board-context/boards.context";
+import { TBoard } from "../../utils/boards.type";
 
-const {boards, setBoards, boardSelected } = useContext(BoardsContext)
-
-export const fnChangeOfState = (
-    subTaskId: number, 
-    iscompleted: boolean,
-    stateId: number,
-    taskId: number,
-
+export const moveTask = (
+    boardId:number,
+    fromStateId:number,
+    toStateId:number,
+    taskId:number,
+    setBoards:(value: React.SetStateAction<TBoard[]>) => void
 ) => {
-    const [newBoards, setNewBoards] = useState(boards)
-    
-    
 
+    setBoards((prevBoards) =>
+        prevBoards.map((board) => {
+            if (board.id !== boardId) return board;
 
-    setNewBoards((prevBoards) => {
-        return prevBoards.map((board) =>
-            board.id === boardSelected
-                ? {
-                      ...board,
-                      states: board.states.map((state) =>
-                          state.id === stateId
-                              ? {
-                                    ...state, state
-                                    
-                                    ),
-                                }
-                              : state
-                      ),
-                  }
-                : board
-        );
-    });
-}
+            const fromState = board.states.find((s) => s.id === fromStateId);
+            const toState = board.states.find((s) => s.id === toStateId);
+            if (!fromState || !toState) return board;
+
+            const taskToMove = fromState.tasks.find((t) => t.id === taskId);
+            if (!taskToMove) return board;
+
+            return {
+                ...board,
+                states: board.states.map((state) => {
+                    if (state.id === fromStateId) {
+                        return {
+                            ...state,
+                            tasks: state.tasks.filter((t) => t.id !== taskId), // la sacamos
+                        };
+                    }
+                    if (state.id === toStateId) {
+                        return {
+                            ...state,
+                            tasks: [...state.tasks, taskToMove], // la metemos
+                        };
+                    }
+                    return state;
+                }),
+            };
+        })
+    );
+};

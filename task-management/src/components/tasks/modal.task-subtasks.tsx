@@ -7,13 +7,18 @@ export const ModalTasks = (props: {
     taskId: number,
 
 }) => {
-    const { boardSelected, boards, fnCompletedSubTasks } = useContext(BoardsContext);
+    const { boardSelected, boards, fnCompletedSubTasks, moveTask } = useContext(BoardsContext);
+    const [ idTaskSelect, setIdTaskSelect ] = useState<number>(0)
 
     const board = boards.find((b) => b.id === boardSelected);
     const state = board?.states.find((s) => s.id === props.stateId);
     const taskShow = state?.tasks?.find((item) => item.id === props.taskId)
 
-    const [changeState, setChangeState] = useState<null | number>()
+    const fnMoveTask = (
+        toStateId: number, 
+    ) => {
+        moveTask(boardSelected, props.stateId, toStateId, props.taskId)
+    }
 
     return (
         <>
@@ -23,7 +28,9 @@ export const ModalTasks = (props: {
             <form action="form absolute translate-x-1/4 translate-y-1/4"
                 onSubmit={(e) => {
                     e.preventDefault();
-                    props.fnShowTaskModal()
+                                            
+                    props.fnShowTaskModal();
+                    
                 }}
             >
                 <h3 className="text-xl m-2">{taskShow?.name}</h3>
@@ -54,9 +61,10 @@ export const ModalTasks = (props: {
                 <select
                     className="m-2"
                     name="" id=""
+                    defaultValue={props.stateId}
                     onClickCapture={(e) => {
-                        setChangeState(Number(e.currentTarget.value)),
-                        console.log(changeState)
+                        setIdTaskSelect(Number(e.currentTarget.value))
+                        
                     }}>
                     {board?.states.map((stateref) => {
                         return (
@@ -68,7 +76,7 @@ export const ModalTasks = (props: {
                 <button
                     type="submit"
                     className="border-2 border-indigo-400 h-8 rounded-md m-2"
-                    onClick={() => { }}
+                    onClick={() => { fnMoveTask(idTaskSelect) }}
                 >Apply Changes</button>
                 <button
                     type="reset"
