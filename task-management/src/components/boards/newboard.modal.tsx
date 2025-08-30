@@ -30,7 +30,7 @@ export const NewBoardModal = (props: {
             }
             className="m-3 text-center"
             >
-                <h2>Add a new Board</h2>
+                <h2 className="mb-2 text-xl">Add a new Board</h2>
                 <label >
                     <input 
                         type="text"

@@ -50,6 +50,7 @@ export const NewTaskModal = (props: {
                     props.fnOnOffBtnNewTask();
                 }}
             >
+                <h2 className="mb-2 text-xl">Add a new Task and subtasks</h2>
                 <input
                     className="border border-sky-800 text-gray-900 rounded-md m-1"
                     type="text"
@@ -57,7 +58,9 @@ export const NewTaskModal = (props: {
                     value={taskName}
                     onChange={(e) => setTaskName(e.target.value)}
                 />
-
+                <fieldset>
+                <h2 className="mb-2 text-xl">Subtasks</h2>
+                
                 <ul>
                     {subTasks.map((subTask) => (
                         <li key={subTask.id}>{subTask.name}</li>
@@ -71,12 +74,13 @@ export const NewTaskModal = (props: {
                     value={subTaskName}
                     onChange={(e) => setSubTaskName(e.target.value)}
                 />
+                
                 <button className="border-2 border-indigo-400 h-8 rounded-md m-2"
                     type="button" 
                     onClick={handleAddSubTask}>
                     + Sub Task
                 </button>
-
+                </fieldset>
                 <button 
                     className="border-2 border-indigo-400 h-8 rounded-md m-2"
                     type="submit">

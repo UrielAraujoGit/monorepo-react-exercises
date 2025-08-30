@@ -30,6 +30,7 @@ export const NewStateModal = (
                     props.fnOnOffBtnNewState()
                 }}
             >
+                <h2 className="mb-2 text-xl">Add a new State</h2>
                 <input
                     className="border border-sky-800 text-gray-900 m-1 rounded-md"
                     type="text"
