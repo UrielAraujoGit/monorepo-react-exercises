@@ -30,17 +30,24 @@ export const NewBoardModal = (props: {
             }
             className="m-3 text-center"
             >
+                <h2>Add a new Board</h2>
                 <label >
                     <input 
                         type="text"
                         value={newNameBoard}
                         onChange={(e) => { setNewNameBoard(e.currentTarget.value) }}
                         className="border-2 border-indigo-400 h-8 rounded-md"
+                        placeholder="board name"
                     />
                 </label>
                 <button
                     className="border-2 border-indigo-400 h-8 rounded-md m-2"
                 >ADD</button>
+                <button
+                    className="border-2 border-indigo-400 h-8 rounded-md m-2"
+                    type="reset"
+                    onClick={()=>{props.fnBtnOnOffNewBoard()}}
+                >Cancel</button>
             </form>
         </>
     )
