@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { dataTemporaly } from "../../models/datatemporaly";
 import { TBoard, TSubTask } from "../../utils/boards.type";
 import { fnNewBoards as importedFnNewBoards } from "../boards/fnnewboards";
@@ -10,79 +10,101 @@ import { moveTask as importedMoveTask } from "../tasks/fnchangetaskofstate";
 
 
 type TBoardsProviderProps = {
-    children: React.ReactNode;
+  children: React.ReactNode;
+};
+
+const BoardsProvider: React.FC<TBoardsProviderProps> = ({ children }) => {
+  const [boards, setBoards] = useState<TBoard[]>(dataTemporaly);
+
+  const [boardSelected, setBoardSelected] = useState(1);
+  const [idToDo, setIdToDo] = useState<number>(100);
+
+  const conectionApi = () => {
+    const data: string = JSON.stringify(dataTemporaly)
+    if (localStorage.getItem('dataKanban') === null) {
+      localStorage.setItem('dataKanban', data)
+    } else if (localStorage.getItem('dataKanban') != null) {
+      const dataLocal = localStorage.getItem('dataKanban') || data
+      setBoards(JSON.parse(dataLocal))
+    }
+    console.log(data)
+  }
+
+  const setDataKanban = () => {
+    const dataLocal: string = JSON.stringify(boards);
+    
+    localStorage.setItem('dataKanban', dataLocal);
+  }
+
+  useEffect(()=>{
+    conectionApi();
+    setDataKanban();
+  },[])
+
+  const fnNewId = () => setIdToDo((prev) => prev + 1);
+
+  const fnNewBoards = (nameNewBoard: string) => {
+    importedFnNewBoards(nameNewBoard, fnNewId, idToDo, boards, setBoards);
   };
-  
-  const BoardsProvider: React.FC<TBoardsProviderProps> = ({ children }) => {
-    const [boards, setBoards] = useState<TBoard[]>(dataTemporaly);
-  
-    const [boardSelected, setBoardSelected] = useState(1);
-    const [idToDo, setIdToDo] = useState<number>(100);
-  
-    const fnNewId = () => setIdToDo((prev) => prev + 1);
-  
-    const fnNewBoards = (nameNewBoard: string) => {
-      importedFnNewBoards(nameNewBoard, fnNewId, idToDo, boards, setBoards);
-    };
-  
-    const fnNewState = (nameNewState: string, addBgColor: string) => {
-      importedFnNewState(nameNewState, addBgColor, boards, fnNewId, idToDo,setBoards, boardSelected)
-    }
-  
-    const fnNewTasks = (nameNewTask: string, addSubTasks: Array<TSubTask>,) => {
-      importedFnNewTasks( nameNewTask, addSubTasks, boards,
-        fnNewId,
-        idToDo,
-        setBoards,
-        boardSelected )
-    }
 
-    const fnCompletedSubTasks = (subTaskId: number, 
-      iscompleted: boolean,
-      stateId: number,
-      taskId: number,) =>{
-        importedFnComletedSubtasks(subTaskId, 
-          iscompleted,
-          stateId,
-          taskId,
-          setBoards,
-          boardSelected)
-      }
+  const fnNewState = (nameNewState: string, addBgColor: string) => {
+    importedFnNewState(nameNewState, addBgColor, boards, fnNewId, idToDo, setBoards, boardSelected)
+  }
 
-    const moveTask = (
-      boardId:number,
-    fromStateId:number,
-    toStateId:number,
-    taskId:number,
-    ) => {
-      importedMoveTask(
+  const fnNewTasks = (nameNewTask: string, addSubTasks: Array<TSubTask>,) => {
+    importedFnNewTasks(nameNewTask, addSubTasks, boards,
+      fnNewId,
+      idToDo,
+      setBoards,
+      boardSelected)
+  }
+
+  const fnCompletedSubTasks = (subTaskId: number,
+    iscompleted: boolean,
+    stateId: number,
+    taskId: number,) => {
+    importedFnComletedSubtasks(subTaskId,
+      iscompleted,
+      stateId,
+      taskId,
+      setBoards,
+      boardSelected)
+  }
+
+  const moveTask = (
+    boardId: number,
+    fromStateId: number,
+    toStateId: number,
+    taskId: number,
+  ) => {
+    importedMoveTask(
       boardId,
-    fromStateId,
-    toStateId,
-    taskId,
-    setBoards)
-    }
+      fromStateId,
+      toStateId,
+      taskId,
+      setBoards)
+  }
 
-    return (
-      <BoardsContext.Provider
-        value={{
-          boards,
-          setBoards,
-          boardSelected,
-          setBoardSelected,
-          idToDo,
-          setIdToDo,
-          fnNewId,
-          fnNewBoards,
-          fnNewState,
-          fnNewTasks,
-          fnCompletedSubTasks,
-          moveTask,
-        }}
-      >
-        {children}
-      </BoardsContext.Provider>
-    );
-  };
-  
-  export default BoardsProvider;
+  return (
+    <BoardsContext.Provider
+      value={{
+        boards,
+        setBoards,
+        boardSelected,
+        setBoardSelected,
+        idToDo,
+        setIdToDo,
+        fnNewId,
+        fnNewBoards,
+        fnNewState,
+        fnNewTasks,
+        fnCompletedSubTasks,
+        moveTask,
+      }}
+    >
+      {children}
+    </BoardsContext.Provider>
+  );
+};
+
+export default BoardsProvider;
