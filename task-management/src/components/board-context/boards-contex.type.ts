@@ -19,4 +19,5 @@ export type TBoardsContext = {
     fromStateId:number,
     toStateId:number,
     taskId:number) => void,
+    deleteBoard: () => void,
 }

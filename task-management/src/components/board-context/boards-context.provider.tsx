@@ -8,6 +8,7 @@ import { BoardsContext } from "./boards.context";
 import { fnCompletedSubTasks as importedFnComletedSubtasks } from "../tasks/fnchangesubtasks";
 import { moveTask as importedMoveTask } from "../tasks/fnchangetaskofstate";
 import { lastId } from "../service/lastId";
+import { deleteBoard as importedDeleteBoard } from "../boards/deleted.boards";
 
 type TBoardsProviderProps = {
   children: React.ReactNode;
@@ -81,6 +82,14 @@ const BoardsProvider: React.FC<TBoardsProviderProps> = ({ children }) => {
       taskId,
       setBoards)
   }
+  const deleteBoard = () => {
+    importedDeleteBoard(
+      boardSelected,
+      setBoards,
+      setBoardSelected,
+    )
+
+  }
 
   return (
     <BoardsContext.Provider
@@ -97,6 +106,7 @@ const BoardsProvider: React.FC<TBoardsProviderProps> = ({ children }) => {
         fnNewTasks,
         fnCompletedSubTasks,
         moveTask,
+        deleteBoard,
       }}
     >
       {children}
