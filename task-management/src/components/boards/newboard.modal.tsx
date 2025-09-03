@@ -2,6 +2,7 @@ import { useContext, useState } from "react"
 import { BoardsContext } from "../board-context/boards.context"
 import { TBoardsContext } from "../board-context/boards-contex.type";
 
+
 export const NewBoardModal = (props: {
     fnBtnOnOffNewBoard:()=>void,
 }) => {
@@ -13,6 +14,7 @@ export const NewBoardModal = (props: {
     const handleAddBoard = () => {
         fnNewBoards(newNameBoard)
         setNewNameBoard('')
+        props.fnBtnOnOffNewBoard()
     };
 
 
@@ -42,6 +44,7 @@ export const NewBoardModal = (props: {
                 </label>
                 <button
                     className="border-2 border-indigo-400 h-8 rounded-md m-2"
+                    
                 >ADD</button>
                 <button
                     className="border-2 border-indigo-400 h-8 rounded-md m-2"

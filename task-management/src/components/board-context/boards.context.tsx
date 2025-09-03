@@ -14,6 +14,6 @@ export const BoardsContext = createContext<TBoardsContext>({
   fnNewState: () => console.error('new state fn no implemented!'),
   fnNewTasks:() => console.log('new task fn no implemented!'),
   fnCompletedSubTasks: () => console.log('Completed sub-tasks fn no implemented!'),
-  moveTask: () => console.log('move-task fn no implemented!'),
+  moveTask: () => console.log('move-task fn no implemented!'),  
 })
 

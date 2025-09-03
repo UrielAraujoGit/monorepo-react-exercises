@@ -7,39 +7,36 @@ import { fnNewTasks as importedFnNewTasks } from "../tasks/fnnewtasks";
 import { BoardsContext } from "./boards.context";
 import { fnCompletedSubTasks as importedFnComletedSubtasks } from "../tasks/fnchangesubtasks";
 import { moveTask as importedMoveTask } from "../tasks/fnchangetaskofstate";
-
+import { lastId } from "../service/lastId";
 
 type TBoardsProviderProps = {
   children: React.ReactNode;
 };
 
 const BoardsProvider: React.FC<TBoardsProviderProps> = ({ children }) => {
-  const [boards, setBoards] = useState<TBoard[]>(dataTemporaly);
+  const [boards, setBoards] = useState<TBoard[]>([]);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("boards");
+
+    if (stored) {
+      setBoards(JSON.parse(stored));
+    } else {
+      setBoards(dataTemporaly); // primera vez, arranca con el JSON de ejemplo
+    }
+    setIdToDo(lastId(stored ? JSON.parse(stored!) : dataTemporaly))
+  }, []);
+
+  useEffect(() => {
+    if (boards.length > 0) {
+      localStorage.setItem("boards", JSON.stringify(boards));
+    }
+  }, [boards]);
+
 
   const [boardSelected, setBoardSelected] = useState(1);
   const [idToDo, setIdToDo] = useState<number>(100);
 
-  const conectionApi = () => {
-    const data: string = JSON.stringify(dataTemporaly)
-    if (localStorage.getItem('dataKanban') === null) {
-      localStorage.setItem('dataKanban', data)
-    } else if (localStorage.getItem('dataKanban') != null) {
-      const dataLocal = localStorage.getItem('dataKanban') || data
-      setBoards(JSON.parse(dataLocal))
-    }
-    console.log(data)
-  }
-
-  const setDataKanban = () => {
-    const dataLocal: string = JSON.stringify(boards);
-    
-    localStorage.setItem('dataKanban', dataLocal);
-  }
-
-  useEffect(()=>{
-    conectionApi();
-    setDataKanban();
-  },[])
 
   const fnNewId = () => setIdToDo((prev) => prev + 1);
 

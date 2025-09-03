@@ -11,48 +11,48 @@ export const dataTemporaly: Array<TBoard> = [
           name: "To do",
           color: "#F3B664",
           tasks: [
-            {
-              id: 1,
-              name: "Build UI for onboarding flow",
-              subtasks: [
-                {
-                  id: 1,
-                  name: "Research competitor prices and business model",
-                  completed: true,
-                },
-                {
-                  id: 2,
-                  name: "Outline a business model that works for our solution",
-                  completed: true,
-                },
-                {
-                  id: 3,
-                  name: "Talk to potential customers about out proposed solution",
-                  completed: false,
-                },
-              ],
-            },
-            {
-              id: 2,
-              name: "Add account management endpoints",
-              subtasks: [
-                {
-                  id: 1,
-                  name: "Upgrade plan",
-                  completed: false,
-                },
-                {
-                  id: 2,
-                  name: "Cancel plan",
-                  completed: false,
-                },
-                {
-                  id: 3,
-                  name: "Update payment method",
-                  completed: false,
-                },
-              ],
-            },
+            // {
+            //   id: 1,
+            //   name: "Build UI for onboarding flow",
+            //   subtasks: [
+            //     {
+            //       id: 1,
+            //       name: "Research competitor prices and business model",
+            //       completed: true,
+            //     },
+            //     {
+            //       id: 2,
+            //       name: "Outline a business model that works for our solution",
+            //       completed: true,
+            //     },
+            //     {
+            //       id: 3,
+            //       name: "Talk to potential customers about out proposed solution",
+            //       completed: false,
+            //     },
+            //   ],
+            // },
+            // {
+            //   id: 2,
+            //   name: "Add account management endpoints",
+            //   subtasks: [
+            //     {
+            //       id: 1,
+            //       name: "Upgrade plan",
+            //       completed: false,
+            //     },
+            //     {
+            //       id: 2,
+            //       name: "Cancel plan",
+            //       completed: false,
+            //     },
+            //     {
+            //       id: 3,
+            //       name: "Update payment method",
+            //       completed: false,
+            //     },
+            //   ],
+            // },
           ],
         },
         {
@@ -60,22 +60,22 @@ export const dataTemporaly: Array<TBoard> = [
           name: "Doing",
           color: "#F1EB90",
           tasks: [
-            {
-              id: 2,
-              name: "Design settings and search pages",
-              subtasks: [
-                {
-                  id: 4,
-                  name: "Design settings page",
-                  completed: true,
-                },
-                {
-                  id: 5,
-                  name: "Design search page",
-                  completed: false,
-                },
-              ],
-            },
+            // {
+            //   id: 2,
+            //   name: "Design settings and search pages",
+            //   subtasks: [
+            //     {
+            //       id: 4,
+            //       name: "Design settings page",
+            //       completed: true,
+            //     },
+            //     {
+            //       id: 5,
+            //       name: "Design search page",
+            //       completed: false,
+            //     },
+            //   ],
+            // },
           ],
         },
         {
@@ -83,22 +83,22 @@ export const dataTemporaly: Array<TBoard> = [
           name: "Done",
           color: "#9FBB73",
           tasks: [
-            {
-              id: 3,
-              name: "Design settings and buy pages",
-              subtasks: [
-                {
-                  id: 7,
-                  name: "Design settings buy page",
-                  completed: true,
-                },
-                {
-                  id: 8,
-                  name: "Design buy page",
-                  completed: false,
-                },
-              ],
-            },
+            // {
+            //   id: 3,
+            //   name: "Design settings and buy pages",
+            //   subtasks: [
+            //     {
+            //       id: 7,
+            //       name: "Design settings buy page",
+            //       completed: true,
+            //     },
+            //     {
+            //       id: 8,
+            //       name: "Design buy page",
+            //       completed: false,
+            //     },
+            //   ],
+            // },
           ]
         }
       ],

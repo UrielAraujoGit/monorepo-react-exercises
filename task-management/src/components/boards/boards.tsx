@@ -9,8 +9,8 @@ export const Boards = (props: {
   btnOnOffNewBoard: boolean,
 }
 ) => {
-  const { boards, setBoardSelected, } = useContext<TBoardsContext>(BoardsContext)
-
+  const { boards, setBoardSelected } = useContext<TBoardsContext>(BoardsContext)
+  
   return (
     <>
       <section className="grid grid-cols-5 h-screen">
