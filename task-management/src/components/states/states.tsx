@@ -5,6 +5,7 @@ import { NewStateModal } from "./modal.state";
 import { TBoardsContext } from "../board-context/boards-contex.type";
 import { NewTaskModal } from "../tasks/modal.newtasks";
 import { DeleteBoardModal } from "./modal.DeleteBoard";
+import { EditBoardModal } from "./modal.EditBoard";
 
 export const StateComponent = () => {
   const { boards, boardSelected } = useContext<TBoardsContext>(BoardsContext);
@@ -15,7 +16,7 @@ export const StateComponent = () => {
   const [onOffBtnNewTask, setOnOffBtnNewTask] = useState(false);
   const [ selectEdit, setSelectEdit ] = useState(false)
   const [ onOffModalDelete, setOnOffModalDelete ] = useState(false)
-
+  const [ onOffModalEdit, setOnOffModalEdit ]= useState(false)
   const fnOnOffBtnNewState = () => {
     setOnOffBtnNewState(!onOffBtnNewState);
   };
@@ -27,6 +28,10 @@ export const StateComponent = () => {
   }
   const fnOnOffModalDelete = () => { 
     setOnOffModalDelete(!onOffModalDelete)
+  }
+
+  const fnOnOffModalEdit = () => {
+    setOnOffModalEdit(!onOffModalEdit)
   }
 
   const cantCol = boardShow?.states.length ? boardShow?.states.length + 1 : 4;
@@ -52,7 +57,7 @@ export const StateComponent = () => {
         </div>
         {selectEdit 
           ? <div className="flex w-20 flex-col bg-gray-700 rounded-sm p-1 gap-2 absolute top-16 right-0">
-            <button disabled> edit </button>
+            <button onClick={()=>{fnOnOffModalEdit()}}> edit </button>
             <button onClick={()=>{fnOnOffModalDelete()}}> ❌ </button>
           </div>
           : null}
@@ -87,6 +92,8 @@ export const StateComponent = () => {
         nameboard={boardShow?.name || ''}
       ></DeleteBoardModal>)
       :null}
+      {onOffModalEdit? 
+      <EditBoardModal fnShowEditModalModal={fnOnOffModalEdit}></EditBoardModal> : null}
     </>
   );
 };
