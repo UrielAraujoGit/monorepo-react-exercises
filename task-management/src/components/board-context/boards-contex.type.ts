@@ -22,4 +22,5 @@ export type TBoardsContext = {
     deleteBoard: () => void,
     fnChangeStateName: (nameState: string,
     idState: number,) => void,
+    fnChangeNameBoard: (nameNewBoard: string,) => void,
 }

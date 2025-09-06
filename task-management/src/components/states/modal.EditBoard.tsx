@@ -11,15 +11,14 @@ export const EditBoardModal = (props: {
     fnShowEditModalModal: () => void,
 
 }) => {
-    const { boardSelected, boards, fnChangeStateName } = useContext(BoardsContext);
+    const { boardSelected, boards, fnChangeStateName, fnChangeNameBoard } = useContext(BoardsContext);
 
     const board = boards.find((b) => b.id === boardSelected);
     const [stateList, setStateList] = useState<Item[]>([])
-    // const [nameState, setNameState] = useState<string>('')
+    const [nameBoard, setNameBoard] = useState<string>('')
     // const [idState, setIdState] = useState<number>(0)
 
-
-    const handleChange = (id: number, newValue: string) => {
+    const handleChangeNameState = (id: number, newValue: string) => {
         const isId = stateList.find(item => item.id === id)
         if (isId) {
             setStateList(
@@ -42,9 +41,11 @@ export const EditBoardModal = (props: {
         stateList.map((item) => {
             fnChangeStateName(item.value, item.id)
         })
-        console.log(stateList)
     }
 
+    const handleChangeNameBoard = () => {
+        fnChangeNameBoard(nameBoard != '' ? nameBoard : board!.name )
+    }
     return (
         <>
             <div className="form_velo"
@@ -54,17 +55,18 @@ export const EditBoardModal = (props: {
                 onSubmit={(e) => {
                     e.preventDefault();
                     fnChangeList()
-
+                    handleChangeNameBoard()
                     props.fnShowEditModalModal()
                 }}
             >
                 <h3 className="text-xl m-2">Edit: {board?.name}</h3>
+                <input
+                    className="p-1"
+                    type="text"
+                    placeholder={board?.name}
+                    onChange={(e) => { setNameBoard(e.currentTarget.value) }}
+                />
                 <ul>
-                    <input 
-                        type="text" 
-                        placeholder={board?.name} 
-                        onChange={()=>{}}
-                    />
                     {board?.states.map((state) => (
                         <li
                             key={state.id}
@@ -72,9 +74,10 @@ export const EditBoardModal = (props: {
                         >
                             <div>
                                 <input type="text"
+                                className="m-2 p-1"
                                     placeholder={state.name}
                                     onChange={(e) => {
-                                        handleChange(state.id, e.currentTarget.value)
+                                        handleChangeNameState(state.id, e.currentTarget.value)
                                     }}
 
                                 />

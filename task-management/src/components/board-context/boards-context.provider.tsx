@@ -10,6 +10,7 @@ import { moveTask as importedMoveTask } from "../tasks/fnchangetaskofstate";
 import { lastId } from "../service/lastId";
 import { deleteBoard as importedDeleteBoard } from "../boards/deleted.boards";
 import { fnChangeStateName as importedFnChangeStateName  } from "../states/fnChangeStateName";
+import { fnChangeNameBoard as importedFnChangeNameBoard } from "../boards/fnChangeNameBoards";
 
 type TBoardsProviderProps = {
   children: React.ReactNode;
@@ -101,6 +102,15 @@ const BoardsProvider: React.FC<TBoardsProviderProps> = ({ children }) => {
       boardSelected,
     )
   }
+  const fnChangeNameBoard = (
+    nameNewBoard: string,
+  ) => {
+    importedFnChangeNameBoard(
+      nameNewBoard,
+      boardSelected,
+      setBoards,
+    )
+  }
 
   return (
     <BoardsContext.Provider
@@ -119,6 +129,7 @@ const BoardsProvider: React.FC<TBoardsProviderProps> = ({ children }) => {
         moveTask,
         deleteBoard,
         fnChangeStateName,
+        fnChangeNameBoard,
       }}
     >
       {children}
