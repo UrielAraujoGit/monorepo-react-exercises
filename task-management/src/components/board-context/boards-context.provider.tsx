@@ -9,6 +9,7 @@ import { fnCompletedSubTasks as importedFnComletedSubtasks } from "../tasks/fnch
 import { moveTask as importedMoveTask } from "../tasks/fnchangetaskofstate";
 import { lastId } from "../service/lastId";
 import { deleteBoard as importedDeleteBoard } from "../boards/deleted.boards";
+import { fnChangeStateName as importedFnChangeStateName  } from "../states/fnChangeStateName";
 
 type TBoardsProviderProps = {
   children: React.ReactNode;
@@ -88,7 +89,17 @@ const BoardsProvider: React.FC<TBoardsProviderProps> = ({ children }) => {
       setBoards,
       setBoardSelected,
     )
-
+  }
+  const fnChangeStateName = (
+    nameState: string,
+    idState: number,
+  ) => {
+    importedFnChangeStateName(
+      nameState,
+      idState,
+      setBoards,
+      boardSelected,
+    )
   }
 
   return (
@@ -107,6 +118,7 @@ const BoardsProvider: React.FC<TBoardsProviderProps> = ({ children }) => {
         fnCompletedSubTasks,
         moveTask,
         deleteBoard,
+        fnChangeStateName,
       }}
     >
       {children}

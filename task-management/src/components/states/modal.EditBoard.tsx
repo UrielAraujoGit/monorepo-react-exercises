@@ -1,18 +1,37 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BoardsContext } from "../board-context/boards.context";
+
+type Item = {
+    value: string;
+    id: number;
+};
+
 
 export const EditBoardModal = (props: {
     fnShowEditModalModal: () => void,
-    
 
 }) => {
-    const { boardSelected, boards, } = useContext(BoardsContext);
-   
+    const { boardSelected, boards, fnChangeStateName } = useContext(BoardsContext);
 
     const board = boards.find((b) => b.id === boardSelected);
-    
+    const [stateList, setStateList] = useState<Item[]>([])
+    // const [nameState, setNameState] = useState<string>('')
+    // const [idState, setIdState] = useState<number>(0)
 
-    
+
+    const handleChange = (id: number, newValue: string) => {
+        setStateList((prev) =>
+             prev.map((item) => (item.id === id ? { ...item, value: newValue } : item))
+        );
+        console.log(stateList)
+    };
+
+    const fnChangeList = () => {
+        stateList.map(({value, id}) => {
+            fnChangeStateName(value, id)
+        })
+        console.log(stateList)
+    }
 
     return (
         <>
@@ -22,9 +41,9 @@ export const EditBoardModal = (props: {
             <form action="form absolute translate-x-1/4 translate-y-1/4"
                 onSubmit={(e) => {
                     e.preventDefault();
-                                            
-                    props.fnShowEditModalModal();
-                    
+                    fnChangeList()
+
+
                 }}
             >
                 <h3 className="text-xl m-2">Edit: {board?.name}</h3>
@@ -34,24 +53,21 @@ export const EditBoardModal = (props: {
                             key={state.id}
                             className="flex gap-2 m-1"
                         >
-                            <h4 className="text-lg">{state.name}</h4>
-                            
+                            <div>
+                                <input type="text"
+                                    placeholder={state.name}
+                                    onChange={(e) => {
+                                        handleChange(state.id, e.currentTarget.value)
+                                    }}
+
+                                />
+                                <button>❌</button>
+                            </div>
                         </li>
                     ))}
                 </ul>
 
-                <select
-                    className="m-2"
-                    name="" id=""
-                    
-                    >
-                    {board?.states.map((stateref) => {
-                        return (
-                            <option key={stateref.id} value={stateref.id} >{stateref.name}</option>
 
-                        )
-                    })}
-                </select>
                 <button
                     type="submit"
                     className="border-2 border-indigo-400 h-8 rounded-md m-2"
