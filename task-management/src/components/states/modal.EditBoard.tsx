@@ -11,12 +11,13 @@ export const EditBoardModal = (props: {
     fnShowEditModalModal: () => void,
 
 }) => {
-    const { boardSelected, boards, fnChangeStateName, fnChangeNameBoard } = useContext(BoardsContext);
+    const { boardSelected, boards, fnChangeStateName, fnChangeNameBoard, deleteState } = useContext(BoardsContext);
 
     const board = boards.find((b) => b.id === boardSelected);
     const [stateList, setStateList] = useState<Item[]>([])
     const [nameBoard, setNameBoard] = useState<string>('')
-    // const [idState, setIdState] = useState<number>(0)
+    const [deployDeletState, setDeployDeletState] = useState(false)
+    const [stateDeleteId, setStateDeleteId] = useState<number>(0)
 
     const handleChangeNameState = (id: number, newValue: string) => {
         const isId = stateList.find(item => item.id === id)
@@ -44,8 +45,10 @@ export const EditBoardModal = (props: {
     }
 
     const handleChangeNameBoard = () => {
-        fnChangeNameBoard(nameBoard != '' ? nameBoard : board!.name )
+        fnChangeNameBoard(nameBoard != '' ? nameBoard : board!.name)
     }
+
+    const handledeltedState = (id:number) =>{ deleteState(id); setDeployDeletState(!deployDeletState)}
     return (
         <>
             <div className="form_velo"
@@ -56,7 +59,7 @@ export const EditBoardModal = (props: {
                     e.preventDefault();
                     fnChangeList()
                     handleChangeNameBoard()
-                    props.fnShowEditModalModal()
+                    
                 }}
             >
                 <h3 className="text-xl m-2">Edit: {board?.name}</h3>
@@ -74,24 +77,37 @@ export const EditBoardModal = (props: {
                         >
                             <div>
                                 <input type="text"
-                                className="m-2 p-1"
+                                    className="m-2 p-1"
                                     placeholder={state.name}
                                     onChange={(e) => {
                                         handleChangeNameState(state.id, e.currentTarget.value)
                                     }}
 
                                 />
-                                <button>❌</button>
+                                <button
+                                    onClick={() => {setStateDeleteId(state.id);
+                                        setDeployDeletState(!deployDeletState)}}
+                                >❌</button>
+                                
                             </div>
                         </li>
                     ))}
                 </ul>
+                {deployDeletState
+                                    ? <div>
+                                        <button onClick={() => setDeployDeletState(!deployDeletState)}>cancel</button>
+                                        <button
+                                        onClick={()=> handledeltedState(stateDeleteId)}
+                                        >DELETE</button>
+                                    </div>
+                                    : null
+                                }
 
 
                 <button
                     type="submit"
                     className="border-2 border-indigo-400 h-8 rounded-md m-2"
-                    onClick={() => { }}
+                    onClick={() => { props.fnShowEditModalModal() }}
                 >Apply Changes</button>
                 <button
                     type="reset"

@@ -11,6 +11,7 @@ import { lastId } from "../service/lastId";
 import { deleteBoard as importedDeleteBoard } from "../boards/deleted.boards";
 import { fnChangeStateName as importedFnChangeStateName  } from "../states/fnChangeStateName";
 import { fnChangeNameBoard as importedFnChangeNameBoard } from "../boards/fnChangeNameBoards";
+import { deleteState as importedDeleteState } from "../states/deleted.state";
 
 type TBoardsProviderProps = {
   children: React.ReactNode;
@@ -111,6 +112,13 @@ const BoardsProvider: React.FC<TBoardsProviderProps> = ({ children }) => {
       setBoards,
     )
   }
+  const deleteState = (id:number) => {
+    importedDeleteState(
+      id,
+      boardSelected,
+      setBoards,
+    )
+  }
 
   return (
     <BoardsContext.Provider
@@ -130,6 +138,7 @@ const BoardsProvider: React.FC<TBoardsProviderProps> = ({ children }) => {
         deleteBoard,
         fnChangeStateName,
         fnChangeNameBoard,
+        deleteState,
       }}
     >
       {children}
