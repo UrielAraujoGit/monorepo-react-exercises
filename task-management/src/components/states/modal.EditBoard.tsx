@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { BoardsContext } from "../board-context/boards.context";
 
 type Item = {
@@ -20,15 +20,27 @@ export const EditBoardModal = (props: {
 
 
     const handleChange = (id: number, newValue: string) => {
-        setStateList((prev) =>
-             prev.map((item) => (item.id === id ? { ...item, value: newValue } : item))
-        );
-        console.log(stateList)
+        const isId = stateList.find(item => item.id === id)
+        if (isId) {
+            setStateList(
+                (prev) => prev.map((item) =>
+                    item.id === id
+                        ? { ...item, value: newValue }
+                        : item
+                )
+            );
+        } else {
+            setStateList(
+                (prev) => [
+                    ...prev,
+                    { id: id, value: "" },
+                ]);
+        }
     };
 
     const fnChangeList = () => {
-        stateList.map(({value, id}) => {
-            fnChangeStateName(value, id)
+        stateList.map((item) => {
+            fnChangeStateName(item.value, item.id)
         })
         console.log(stateList)
     }
@@ -43,11 +55,16 @@ export const EditBoardModal = (props: {
                     e.preventDefault();
                     fnChangeList()
 
-
+                    props.fnShowEditModalModal()
                 }}
             >
                 <h3 className="text-xl m-2">Edit: {board?.name}</h3>
                 <ul>
+                    <input 
+                        type="text" 
+                        placeholder={board?.name} 
+                        onChange={()=>{}}
+                    />
                     {board?.states.map((state) => (
                         <li
                             key={state.id}
