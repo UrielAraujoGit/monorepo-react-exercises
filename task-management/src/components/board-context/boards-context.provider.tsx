@@ -18,7 +18,12 @@ type TBoardsProviderProps = {
 };
 
 const BoardsProvider: React.FC<TBoardsProviderProps> = ({ children }) => {
-  const [boards, setBoards] = useState<TBoard[]>([]);
+  const [boards, updateBoards] = useState<TBoard[]>([]);
+
+  const setBoards = (value:  React.SetStateAction<TBoard[]>) => {
+    updateBoards(value);
+    localStorage.setItem("boards", JSON.stringify(boards));
+  } 
 
   useEffect(() => {
     const stored = localStorage.getItem("boards");
@@ -30,12 +35,6 @@ const BoardsProvider: React.FC<TBoardsProviderProps> = ({ children }) => {
     }
     setIdToDo(lastId(stored ? JSON.parse(stored!) : dataTemporaly))
   }, []);
-
-  useEffect(() => {
-    if (boards.length > 0) {
-      localStorage.setItem("boards", JSON.stringify(boards));
-    }
-  }, [boards]);
 
 
   const [boardSelected, setBoardSelected] = useState(1);
