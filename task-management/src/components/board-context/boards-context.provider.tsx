@@ -9,7 +9,7 @@ import { fnCompletedSubTasks as importedFnComletedSubtasks } from "../tasks/fnch
 import { moveTask as importedMoveTask } from "../tasks/fnchangetaskofstate";
 import { lastId } from "../service/lastId";
 import { deleteBoard as importedDeleteBoard } from "../boards/deleted.boards";
-import { fnChangeStateName as importedFnChangeStateName  } from "../states/fnChangeStateName";
+import { fnChangeStateName as importedFnChangeStateName } from "../states/fnChangeStateName";
 import { fnChangeNameBoard as importedFnChangeNameBoard } from "../boards/fnChangeNameBoards";
 import { deleteState as importedDeleteState } from "../states/deleted.state";
 
@@ -17,29 +17,22 @@ type TBoardsProviderProps = {
   children: React.ReactNode;
 };
 
-const BoardsProvider: React.FC<TBoardsProviderProps> = ({ children }) => {
-  const [boards, updateBoards] = useState<TBoard[]>([]);
+const store = JSON.parse(localStorage.getItem("boards") ?? "null") || dataTemporaly || [];
+const ids = lastId(store)
 
-  const setBoards = (value:  React.SetStateAction<TBoard[]>) => {
+const BoardsProvider: React.FC<TBoardsProviderProps> = ({ children }) => {
+  console.log("render board provider!")
+  const [boards, updateBoards] = useState<TBoard[]>(store);
+
+  const setBoards = (value: React.SetStateAction<TBoard[]>) => {
     updateBoards(value);
     localStorage.setItem("boards", JSON.stringify(boards));
-  } 
-
-  useEffect(() => {
-    const stored = localStorage.getItem("boards");
-
-    if (stored) {
-      setBoards(JSON.parse(stored));
-    } else {
-      setBoards(dataTemporaly); // primera vez, arranca con el JSON de ejemplo
-    }
-    setIdToDo(lastId(stored ? JSON.parse(stored!) : dataTemporaly))
-  }, []);
-
+  }
+  
+  localStorage.setItem("boards", JSON.stringify(boards));
 
   const [boardSelected, setBoardSelected] = useState(1);
-  const [idToDo, setIdToDo] = useState<number>(100);
-
+  const [idToDo, setIdToDo] = useState<number>(ids);
 
   const fnNewId = () => setIdToDo((prev) => prev + 1);
 
@@ -111,7 +104,7 @@ const BoardsProvider: React.FC<TBoardsProviderProps> = ({ children }) => {
       setBoards,
     )
   }
-  const deleteState = (id:number) => {
+  const deleteState = (id: number) => {
     importedDeleteState(
       id,
       boardSelected,
